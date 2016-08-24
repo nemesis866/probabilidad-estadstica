@@ -25,7 +25,7 @@ npm install
 
 Cuando termines el proceso de instalación, ya puedes empezar a trabajar en el proyecto.
 
-# Inicial la aplicación de prueba
+# Iniciar la aplicación de prueba
 
 La aplicación se tendra que ejecutar en modo developer (desarrollo) hasta que sea empaquetada para su distribución, para ejecutarla en la terminal ejecuta el comando.-
 
