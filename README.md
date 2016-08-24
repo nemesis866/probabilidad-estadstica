@@ -13,15 +13,15 @@ La idea principal es crear una pagina web embebida en una app para escritorio, p
 
 Para instalar el entorno de desarrollo necesitas seguir los siguientes pasos.-
 
-* tener instalado en tu equipo nodejs, te recomiendo descargar la version LTS desde su <a href="https://nodejs.org/en/">web oficial</a>.
+* Tener instalado en tu equipo nodejs, te recomiendo descargar la version LTS desde su <a href="https://nodejs.org/en/">web oficial</a>.
 
 * Descargar o clonar este repositorio de github en tu computadora.
 
 * Una ves tengas el repositorio, abre la terminal y ubicate en el directorio del proyecto, instala las dependencias a utilizar con el comando.-
 
-´´´
+```
 npm install
-´´´
+```
 
 Cuando termines el proceso de instalación, ya puedes empezar a trabajar en el proyecto.
 
@@ -29,9 +29,9 @@ Cuando termines el proceso de instalación, ya puedes empezar a trabajar en el p
 
 La aplicación se tendra que ejecutar en modo developer (desarrollo) hasta que sea empaquetada para su distribución, para ejecutarla en la terminal ejecuta el comando.-
 
-´´´
+```
 npm start
-´´´
+```
 
 # Conocimientos necesarios
 
