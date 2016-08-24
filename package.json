@@ -1,0 +1,25 @@
+{
+  "name": "probabilidad",
+  "version": "1.0.0",
+  "description": "Proyecto final de probabilidad y estadistica",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "preinstall": "npm i -g electron",
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://nemesis866@github.com/nemesis866/probabilidad-estadstica.git"
+  },
+  "keywords": [
+    "probabilidad",
+    "estadistica"
+  ],
+  "author": "Paulo Andrade",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nemesis866/probabilidad-estadstica/issues"
+  },
+  "homepage": "https://github.com/nemesis866/probabilidad-estadstica#readme"
+}
