@@ -1,3 +1,7 @@
+/*****************************************************
+Archivo principal de la aplicación
+*****************************************************/
+
 // Agregamos las dependencias
 const {app, BrowserWindow} = require('electron');
 
@@ -9,9 +13,16 @@ function createWindow ()
 {
 	// Creamos la ventana del navegador
 	win = new BrowserWindow({
-		width: 800, // Ancho de la ventana
-		height: 600 // Altura de la ventana
+		height: 600, // Altura de la ventana
+		icon: 'favicon.ico', // Icono de la aplicacion
+		minHeight: 600, // Altura minima de la ventana
+		minWidth: 800, // Ancho minimo de la ventana
+		title: 'Probabilidad',
+		width: 800 // Ancho de la ventana
 	});
+
+	// Barra de progreso
+	//win.setProgressBar(0.5);
 
 	// Cargamos el index.html de la aplicacion
 	win.loadURL(`file://${__dirname}/../index.html`);
