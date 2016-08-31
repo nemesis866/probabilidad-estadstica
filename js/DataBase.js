@@ -10,7 +10,8 @@ class DataBase
 	/*** Propiedades ***/
 
 	// Construcor de la clase
-	constructor(dbName)
+	// @param dbName Nombre que le asignamos a la base de datos
+	constructor(dbName  = 'probabilidad')
 	{
 		// Abrimos una conexion a la base de datos
 		this.connect(dbName);	
@@ -19,7 +20,8 @@ class DataBase
 	/*** Métodos ***/
 
 	// Abrimos una conexion a la base de datos
-	connect(dbName = 'probabilidad')
+	// @param dbName Nombre que le asignamos a la base de datos
+	connect(dbName)
 	{
 		// Abrimos la conexion a la base de datos
 		let req = window.indexedDB.open(dbName, 3);
