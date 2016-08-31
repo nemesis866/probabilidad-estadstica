@@ -44,5 +44,5 @@ npm start
 * Andrade González Paulo César
 * Garcia Quijas Juan Pablo
 * Lazo Godinez Maria Ines
-* Sanchez Alejandra Amaranta
+* Sanchez Gutierrez Alejandra Amaranta
 * Zavala Ortega David
