@@ -14,7 +14,7 @@ function createWindow ()
 	});
 
 	// Cargamos el index.html de la aplicacion
-	win.loadURL(`file://${__dirname}/index.html`);
+	win.loadURL(`file://${__dirname}/../index.html`);
 
 	// Abrimos las herramientas de produccion
 	win.webContents.openDevTools();
