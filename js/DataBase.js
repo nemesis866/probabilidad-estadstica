@@ -79,6 +79,34 @@ class DataBase
 			console.log('upgrade actived');
 		}
 	}
+	// Método para insertar registros a la base de datos
+	// @param name nombre del alacen (coleccion a utilizar)
+	// @param obj objeto con las propiedades a insertar en la colección
+	insert(name, obj)
+	{
+		// info = https://rolandocaldas.com/html5/indexeddb-agregando-objetos-al-almacen
+		// Recuperamos la conexión
+		let db = this.db.result;
+
+		// Iniciamos una transacción
+		// Recibe 2 parametros, 1.- Array de coleccion = es un array con los nombres de las
+		// colecciones que se van a utilizar en la transaccion, 2.- tipo de transacción, exiten
+		// dos tipos, readonly (solo leer datos) y readwrite (lectura y escritura de datos).
+		let data = db.transaction(['nombres'], 'readwrite');
+
+		// Seleccionamos el almacen (coleccion) donde insertar registros, como parametro recibe
+		// el nombre del almacen a utilizar
+		let object = data.objectStore(name);
+
+		// Agregamos el objeto a nuestra coleccion
+		let req = object.put(obj);
+
+		// Controlador para los errores
+		req.onerror = event =>
+		{
+			console.log(req.error.name + ': ' + req.error.message);
+		}
+	}
 	// Verificamos si hay soporte para indexedDB
 	support()
 	{
