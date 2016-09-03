@@ -9,7 +9,10 @@ Archivo principal de estilos
 }
 body
 {
-	background-color: #ddd;
+	background-color: #eee;
+	color: #333;
+	font-size: 16px;
+	font-family: arial, helvetica;
 }
 #wrapper
 {
@@ -17,5 +20,33 @@ body
 }
 
 /*****************************************************
-
+Barra de status
 *****************************************************/
+#statusBar
+{
+	border-top: 1px solid #ccc;
+	bottom: 0;
+	background-color: #ddd;
+	color: #777;
+	font-size: 0;
+	left: 0;
+	padding: 5px;
+	position: fixed;
+	right: 0;
+	text-align: right;
+}
+#statusBar #statusBarLeft
+{
+	display: inline-block;
+	width: 50%;
+	font-size: 13px;
+	vertical-align: middle;
+}
+#statusBar #statusBarRight
+{
+	display: inline-block;
+	font-size: 13px;
+	width: 50%;
+	vertical-align: middle;
+	text-align: right;
+}

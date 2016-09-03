@@ -20,7 +20,11 @@ class OnlineStatus
 	}
 	changueStatus()
 	{
+		// Obtenemos el status de la conexión
 		let status = navigator.onLine ? 'online' : 'offline';
-		console.log(status);
+		// Elemento donde insertar el status
+		let elem = document.getElementById('status');
+		// Insertamos el status
+		elem.innerHTML = status;
 	}
 }

@@ -13,7 +13,7 @@ class DataBase
 	{
 		this.version = 3; // Versión de la base de datos
 		// Abrimos una conexion a la base de datos
-		this.db = this.connect(dbName);	
+		this.db = this.connect(dbName);
 	}
 
 	/*** Métodos ***/
@@ -60,7 +60,7 @@ class DataBase
 			// keyPath sera autoincrementable 
 
 			let objectStore = db.createObjectStore('name', {
-				keyPath: 'myKey',
+				keyPath: 'id',
 				autoIncrement: true
 			});
 
@@ -78,6 +78,11 @@ class DataBase
 
 			console.log('upgrade actived');
 		}
+	}
+	// Método para eliminar datos
+	delete()
+	{
+
 	}
 	// Método para insertar registros a la base de datos
 	// @param name nombre del alacen (coleccion a utilizar)
@@ -104,8 +109,14 @@ class DataBase
 		// Controlador para los errores
 		req.onerror = event =>
 		{
+			// Mostramos el error
 			console.log(req.error.name + ': ' + req.error.message);
 		}
+	}
+	// Método para buscar resultados
+	search()
+	{
+
 	}
 	// Verificamos si hay soporte para indexedDB
 	support()
@@ -113,5 +124,10 @@ class DataBase
 		// Comprobamos si esta soportado en el navegador
 		if(window['indexedDB'] === undefined) console.log('No soportado!');
 		else console.log('Soportado!');
+	}
+	// Método para actualizar datos
+	update()
+	{
+
 	}
 }
