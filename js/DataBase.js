@@ -112,11 +112,132 @@ class DataBase
 			// Mostramos el error
 			console.log(req.error.name + ': ' + req.error.message);
 		}
+
+		// Cuando la transaccion es completada con exito
+		data.oncomplete = event =>
+		{
+			console.log('se guardaron los datos correctamente');
+		}
 	}
 	// Método para buscar resultados
-	search()
+	// @param name nombre del almacen del que se quiere recuperar datos
+	// @param callback funcion a ejecutar si tiene exito la transacción
+	searchAll(name, callback)
 	{
 		// Info - https://rolandocaldas.com/html5/indexeddb-recuperando-los-datos-almacenados
+		// Recuperamos la conexión
+		let db = this.db.result;
+
+		// Iniciamos una transacción
+		// Recibe 2 parametros, 1.- Array de coleccion = es un array con los nombres de las
+		// colecciones que se van a utilizar en la transaccion, 2.- tipo de transacción, exiten
+		// dos tipos, readonly (solo leer datos) y readwrite (lectura y escritura de datos).
+		let data = db.transaction(['nombres'], 'readonly');
+
+		// Seleccionamos el almacen (coleccion) donde recuperar registros, como parametro recibe
+		// el nombre del almacen a utilizar
+		let object = data.objectStore(name);
+
+		// Declaramos un array donde iremos almacenando los registros encontrados
+		let elements = [];
+
+		// Recorremos el almacen con ayuda del método openCursor()
+		object.openCursor().onsuccess = event =>
+		{
+			// Recuperamos el objeto
+			let result = event.target.result;
+
+			// Verificamos si no es nulo
+			if(result === null){
+				return
+			}
+			// SI no lo es lo agregamos a elements
+			elements.push(result.value);
+
+			// Indicamos que siga el recorrido del almacen
+			result.continue();
+		}
+
+		// Si tiene exito la transaccion
+		data.oncomplete = () =>
+		{
+			console.log('Exito al recuperar datos');
+			callback(elements);
+		}
+	}
+	// Método para buscar resultados
+	// @param name nombre del almacen del que se quiere recuperar datos
+	// @param id identificador del registro a obtener
+	// @param callback funcion a ejecutar si tiene exito la transacción
+	searchById(name, id, callback)
+	{
+		// Info - https://rolandocaldas.com/html5/indexeddb-recuperando-los-datos-almacenados
+		// Recuperamos la conexión
+		let db = this.db.result;
+
+		// Iniciamos una transacción
+		// Recibe 2 parametros, 1.- Array de coleccion = es un array con los nombres de las
+		// colecciones que se van a utilizar en la transaccion, 2.- tipo de transacción, exiten
+		// dos tipos, readonly (solo leer datos) y readwrite (lectura y escritura de datos).
+		let data = db.transaction(['nombres'], 'readonly');
+
+		// Seleccionamos el almacen (coleccion) donde recuperar registros, como parametro recibe
+		// el nombre del almacen a utilizar
+		let object = data.objectStore(name);
+
+		// Obtenemos el objeto mediante el id del registro
+		let req = object.get(parseInt(id));
+
+		// Si hubo exito en la consulta
+		req.onsuccess = () =>
+		{
+			let result = req.result;
+
+			// Verificamos que el resultado no sea nulo
+			if(result === null){
+				return
+			}
+
+			// Ejecutamos el calback
+			callback(result.value);
+		}
+	}
+	// Método para buscar resultados
+	// @param name nombre del almacen del que se quiere recuperar datos
+	// @param key index del registro a obtener
+	// @param callback funcion a ejecutar si tiene exito la transacción
+	searchByKey(name, key, callback)
+	{
+		// Info - https://rolandocaldas.com/html5/indexeddb-recuperando-los-datos-almacenados
+		// Recuperamos la conexión
+		let db = this.db.result;
+
+		// Iniciamos una transacción
+		// Recibe 2 parametros, 1.- Array de coleccion = es un array con los nombres de las
+		// colecciones que se van a utilizar en la transaccion, 2.- tipo de transacción, exiten
+		// dos tipos, readonly (solo leer datos) y readwrite (lectura y escritura de datos).
+		let data = db.transaction(['nombres'], 'readonly');
+
+		// Seleccionamos el almacen (coleccion) donde recuperar registros, como parametro recibe
+		// el nombre del almacen a utilizar
+		let object = data.objectStore(name);
+
+		// Obtenemos el objeto mediante el id del registro
+		let req = object.index('by_' + key);
+
+		// Si hubo exito en la consulta
+		req.onsuccess = () =>
+		{
+			let result = req.result;
+
+			// Verificamos que el resultado no sea nulo
+			if(result === null){
+				return
+			}
+
+			// Ejecutamos el calback
+			callback(result.value);
+		}
 	}
 	// Verificamos si hay soporte para indexedDB
 	support()
