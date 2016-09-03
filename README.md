@@ -41,7 +41,11 @@ Al ser una aplicación hibrida para escritorio, es necesario tener conocimientos
 * HTML y CSS.
 * <a href="https://github.com/electron/electron/tree/master/docs-translations/es">Framework electron</a>.
 
-# Compilación para la aplicación
+# Documentación
+
+* <a href="https://github.com/nemesis866/probabilidad-estadstica/docs/dataBase.MD">Base de datos</a>.
+
+# Compilación de la aplicación
 
 Para poder compilar la aplicación debemos tener instalada la dependencia electron-packager de forma global (normalmente se instala junto con las dependencias del proyecto), en caso de no tenerla, puedes instalarla con el siguiente comando.-
 
