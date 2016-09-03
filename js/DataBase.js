@@ -222,8 +222,11 @@ class DataBase
 		// el nombre del almacen a utilizar
 		let object = data.objectStore(name);
 
+		// Indicamos el index donde se realizara la busqueda
+		let index = object.index('by_' + key);
+
 		// Obtenemos el objeto mediante el id del registro
-		let req = object.index('by_' + key);
+		let req = index.get(String(key));		
 
 		// Si hubo exito en la consulta
 		req.onsuccess = () =>
