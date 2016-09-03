@@ -162,7 +162,10 @@ class DataBase
 		data.oncomplete = () =>
 		{
 			console.log('Exito al recuperar datos');
-			callback(elements);
+			// Verificamos si el callback es una función
+			if(typeof callback === 'function'){
+				callback(elements);
+			}
 		}
 	}
 	// Método para buscar resultados
@@ -198,15 +201,19 @@ class DataBase
 				return
 			}
 
-			// Ejecutamos el calback
-			callback(result.value);
+			// Verificamos si el callback es una función
+			if(typeof callback === 'function'){
+				// Ejecutamos el calback
+				callback(result.value);
+			}
 		}
 	}
 	// Método para buscar resultados
 	// @param name nombre del almacen del que se quiere recuperar datos
+	// @param id Nombre de la columna donde se realiza la busqueda
 	// @param key index del registro a obtener
 	// @param callback funcion a ejecutar si tiene exito la transacción
-	searchByKey(name, key, callback)
+	searchByKey(name, id, key, callback)
 	{
 		// Info - https://rolandocaldas.com/html5/indexeddb-recuperando-los-datos-almacenados
 		// Recuperamos la conexión
@@ -223,7 +230,7 @@ class DataBase
 		let object = data.objectStore(name);
 
 		// Indicamos el index donde se realizara la busqueda
-		let index = object.index('by_' + key);
+		let index = object.index('by_' + id);
 
 		// Obtenemos el objeto mediante el id del registro
 		let req = index.get(String(key));		
@@ -238,8 +245,11 @@ class DataBase
 				return
 			}
 
-			// Ejecutamos el calback
-			callback(result.value);
+			// Verificamos si el callback es una función
+			if(typeof callback === 'function'){
+				// Ejecutamos el calback
+				callback(result.value);
+			}
 		}
 	}
 	// Verificamos si hay soporte para indexedDB
