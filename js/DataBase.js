@@ -116,7 +116,7 @@ class DataBase
 	// Método para buscar resultados
 	search()
 	{
-
+		// Info - https://rolandocaldas.com/html5/indexeddb-recuperando-los-datos-almacenados
 	}
 	// Verificamos si hay soporte para indexedDB
 	support()

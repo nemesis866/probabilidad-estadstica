@@ -3,7 +3,108 @@ Archivo principal de la aplicación
 *****************************************************/
 
 // Agregamos las dependencias
-const {app, BrowserWindow} = require('electron');
+const {app, BrowserWindow, Menu} = require('electron');
+
+// Plantilla para el menu
+const template = [
+{
+	label: 'Archivo',
+	submenu: [
+		{
+			label: 'Minimizar',
+			role: 'minimize'
+		},
+		{
+			type: 'separator'
+		},
+		{
+			label: 'Salir',
+			role: 'close'
+		}
+	]
+},
+{
+	label: 'Editar', // Menu Editar
+	submenu: [
+		{
+			label: 'Deshacer',
+			role: 'undo' // Deshacer
+		},
+		{
+			label: 'Rehacer',
+			role: 'redo' // Rehacer
+		},
+		{
+			type: 'separator' // Separador
+		},
+		{
+			label: 'Copiar',
+			role: 'copy' // Copiar
+		},
+		{
+			label: 'Cortar',
+			role: 'cut' // Cortar
+		},
+		{
+			label: 'Pegar',
+			role: 'paste' // Pegar
+		},
+		{
+			type: 'separator' // Separador
+		},
+		{
+			label: 'Seleccionar Todo',
+			role: 'selectall' // Seleccionar todo
+		},
+	]
+},{
+	label: 'Ver',
+	submenu: [
+		{
+			label: 'Reestablecer zoom',
+			role: 'resetzoom'
+		},
+		{
+			label: 'Aumentar zoom',
+			role: 'zoomin'
+		},
+		{
+			label: 'Disminuir zoom',
+			role: 'zoomout'
+		},
+		{
+			type: 'separator'
+		},
+		{
+			label: 'Pantalla completa',
+			role: 'togglefullscreen'
+		}
+	]
+},{
+	label: 'Ayuda',
+	submenu: [
+		{
+			label: 'Más información',
+			click()
+			{
+				let url = 'https://github.com/nemesis866/probabilidad-estadstica';
+				require('electron').shell.openExternal(url);
+			}
+		},
+		{
+			label: 'Acerca de',
+			click()
+			{
+				
+			}
+		}
+	]
+}];
+
+// Creamos el menu principal
+const menu = Menu.buildFromTemplate(template);
+Menu.setApplicationMenu(menu);
+
 
 // Mantener una referencia global del objeto window, si no lo hace, la ventana puede
 // cerrarse automaticamente cuando el objecto garbage collected se utilice.
