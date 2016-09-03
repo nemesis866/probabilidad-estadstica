@@ -41,6 +41,30 @@ Al ser una aplicación hibrida para escritorio, es necesario tener conocimientos
 * HTML y CSS.
 * <a href="https://github.com/electron/electron/tree/master/docs-translations/es">Framework electron</a>.
 
+# Compilación para la aplicación
+
+Para poder compilar la aplicación debemos tener instalada la dependencia electron-packager de forma global (normalmente se instala junto con las dependencias del proyecto), en caso de no tenerla, puedes instalarla con el siguiente comando.-
+
+```
+npm i -g electron-packager
+```
+
+Para empezar a crear el paquete de distribución de la aplicación, abrimos la terminal y nos ubicamos en el directorio principal del proyecto y ejecutamos el siguiente comando con sus opciones.-
+
+```
+electron-packager . --platform=darwin --arch=x64 --version=1.3.4 --ignores=node_modules/electron-* MyApp
+```
+
+Opciones para la compilación.-
+
+* Directorio.- Indicamos el directorio principal de nuestro proyecto, lo indicamos con un punto (.).
+* --platform.- Indicamos la plataforma con la que trabajamos, or defecto es darwin.
+* --arch.- Indicamos la arquitectura de nuestra aplicación.-
+	* ia32.- Para arquitecturas de 32 bits.
+	* x64.- Para arquitecturas de 64 bits.
+* --version.- Indicamos la version de electron con la que estamos trabajando.
+* --ignores.- Indicamos los archivos (paquetes) que seran ignorados durante la compilación.
+
 # Integrantes del equipo
 
 * Andrade González Paulo César
