@@ -3,10 +3,26 @@
   "version": "1.0.0",
   "description": "Proyecto final de probabilidad y estadistica",
   "main": "./js/main.js",
+  "build": {
+    "app-bundle-id": "org.codeando.probabilidad",
+    "app-category-type": "public.app-category.graphics-design",
+    "win": {
+      "title": "Probabilidad",
+      "version": "0.0.12",
+      "msi": true,
+      "authors": "Paulo Andrade"
+    }
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "preinstall": "npm i -g electron electron-packager",
-    "start": "electron ."
+    "preinstall": "npm i -g electron electron-packager electron-builder",
+    "start": "electron .",
+    "dist:win64": "./node_modules/.bin/build --platform win32 --arch x64",
+    "pack:osx": "electron-packager . Probabilidad --out=dist/osx --platform=darwin --arch=x64 --overwrite",
+    "pack:win32": "electron-packager . Probabilidad --out=dist/win --platform=win32 --arch=ia32 --overwrite",
+    "pack:win64": "electron-packager . Probabilidad --out=dist/win --platform=win32 --arch=x64 --version=1.3.4 app-version=1.0 --icon=favicon.ico --overwrite",
+    "build": "npm run pack:osx && npm run pack:win32 && npm run pack:win64",
+    "dist": "npm run dist:win64"
   },
   "repository": {
     "type": "git",
@@ -24,6 +40,7 @@
   "homepage": "https://github.com/nemesis866/probabilidad-estadstica#readme",
   "devDependencies": {
     "electron": "^1.3.4",
+    "electron-builder": "^6.4.0",
     "electron-packager": "^7.7.0"
   }
 }

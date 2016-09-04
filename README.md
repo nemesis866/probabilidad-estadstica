@@ -43,7 +43,7 @@ Al ser una aplicación hibrida para escritorio, es necesario tener conocimientos
 
 # Documentación
 
-* <a href="https://github.com/nemesis866/probabilidad-estadstica/docs/dataBase.MD">Base de datos</a>.
+* <a href="https://github.com/nemesis866/probabilidad-estadstica/blob/master/docs/dataBase.MD">Base de datos</a>.
 
 # Compilación de la aplicación
 
@@ -53,21 +53,35 @@ Para poder compilar la aplicación debemos tener instalada la dependencia electr
 npm i -g electron-packager
 ```
 
-Para empezar a crear el paquete de distribución de la aplicación, abrimos la terminal y nos ubicamos en el directorio principal del proyecto y ejecutamos el siguiente comando con sus opciones.-
+## Empaquetado manual
+
+Para empezar a crear el paquete de distribución de la aplicación, abrimos la terminal (en modo administrador) y nos ubicamos en el directorio principal del proyecto y ejecutamos el siguiente comando con sus opciones.-
 
 ```
-electron-packager . --platform=darwin --arch=x64 --version=1.3.4 --ignores=node_modules/electron-* MyApp
+electron-packager . --platform=win32 --arch=x64 --version=1.3.4 --ignores=node_modules/electron-* --out=/dist MyApp
 ```
 
 Opciones para la compilación.-
 
 * Directorio.- Indicamos el directorio principal de nuestro proyecto, lo indicamos con un punto (.).
-* --platform.- Indicamos la plataforma con la que trabajamos, or defecto es darwin.
+* --platform.- Indicamos la plataforma con la que trabajamos.-
+	* darwin (mac os).
+	* win32 (windows).
 * --arch.- Indicamos la arquitectura de nuestra aplicación.-
 	* ia32.- Para arquitecturas de 32 bits.
 	* x64.- Para arquitecturas de 64 bits.
 * --version.- Indicamos la version de electron con la que estamos trabajando.
 * --ignores.- Indicamos los archivos (paquetes) que seran ignorados durante la compilación.
+
+## Empaqueta automatico
+
+Basta con abrir la terminal (en modo administrador) y ejecutar el siguiente comando.-
+
+```
+npm run build
+```
+
+Empezara la compilación para mac os, windws de 32 y 64 bits.
 
 # Integrantes del equipo
 
