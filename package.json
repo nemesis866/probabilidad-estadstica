@@ -8,7 +8,8 @@
     "app-category-type": "public.app-category.graphics-design",
     "win": {
       "title": "Probabilidad",
-      "version": "0.0.12",
+      "version": "1.0.0",
+      "iconUrl": "https://github.com/nemesis866/probabilidad-estadstica/blob/master/favicon.ico?raw=true",
       "msi": true,
       "authors": "Paulo Andrade"
     }
