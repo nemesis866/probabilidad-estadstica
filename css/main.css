@@ -14,9 +14,15 @@ body
 	font-size: 16px;
 	font-family: arial, helvetica;
 }
+canvas
+{
+	max-width: 90%;
+	margin-left: 5%;
+}
 #wrapper
 {
 	padding: 10px;
+	margin-bottom: 23px;
 }
 
 /*****************************************************

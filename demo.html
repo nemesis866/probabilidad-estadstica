@@ -11,6 +11,9 @@
 	    We are using node <script>document.write(process.versions.node)</script>,
 	    Chrome <script>document.write(process.versions.chrome)</script>,
 	    and Electron <script>document.write(process.versions.electron)</script>.
+
+	    <canvas id="prototype-1"></canvas>
+	    <canvas id="prototype"></canvas>
 	</div>
 	<div id="statusBar">
 		<div id="statusBarLeft">
@@ -22,8 +25,15 @@
 	</div>
 
 	<script src="js/vendor/chart.js"></script>
+	<script src="js/ChartJs.js"></script>
     <script src="js/DataBase.js"></script>
     <script src="js/OnlineStatus.js"></script>
     <script src="js/app.js"></script>
+    <script>
+    	let chart = new ChartJs();
+
+    	chart.createLine('prototype-1');
+    	chart.createBar('prototype');
+    </script>
 </body>
 </html>
