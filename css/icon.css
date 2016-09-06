@@ -828,6 +828,8 @@
   content: "\ea0b";
 }
 .icon-info:before {
+  font-size: 100px;
+  color: #8E7FF4;
   content: "\ea0c";
 }
 .icon-cancel-circle:before {

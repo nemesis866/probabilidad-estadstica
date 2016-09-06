@@ -44,6 +44,7 @@ Al ser una aplicación hibrida para escritorio, es necesario tener conocimientos
 # Documentación
 
 * <a href="https://github.com/nemesis866/probabilidad-estadstica/blob/master/docs/dataBase.MD">Base de datos</a>.
+* <a href="https://github.com/nemesis866/probabilidad-estadstica/blob/master/docs/chartJs.MD">Graficas</a>.
 
 # Compilación de la aplicación
 
