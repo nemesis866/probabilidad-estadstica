@@ -12,6 +12,9 @@
 	    Chrome <script>document.write(process.versions.chrome)</script>,
 	    and Electron <script>document.write(process.versions.electron)</script>.
 
+		<canvas id="prototype-4"></canvas>
+		<canvas id="prototype-3"></canvas>
+		<canvas id="prototype-2"></canvas>
 	    <canvas id="prototype-1"></canvas>
 	    <canvas id="prototype"></canvas>
 	</div>
@@ -32,8 +35,25 @@
     <script>
     	let chart = new ChartJs();
 
-    	chart.createLine('prototype-1');
-    	chart.createBar('prototype');
+    	let HBLabels = ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"]; // [OPCIONAL]
+		let HBLabel = '# de votos'; // OPCIONAL
+		let HBData = [12, 19, 3, 5, 2, 3]; // OPCIONAL
+    	chart.createHorizontalBar('prototype-2', HBLabel, HBLabels, HBData);
+
+    	let lineLabels = ["January", "February", "March", "April", "May", "June", "July"];
+    	let linelabel = 'Etiqueta para la grafica';
+    	let lineData = [65, 59, 80, 81, 56, 55, 40];
+    	chart.createLine('prototype-1', linelabel, lineLabels, lineData);
+
+    	let barLabels = ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"]; // [OPCIONAL]
+		let barLabel = '# de votos'; // OPCIONAL
+		let barData = [12, 19, 3, 5, 2, 3]; // OPCIONAL
+    	chart.createBar('prototype', barLabel, barLabels, barData);
+
+    	let pieLabels = ["Red","Blue","Yellow"];
+    	let pieData = [300, 50, 100];
+    	chart.createPie('prototype-3', pieLabels, pieData);
+    	chart.createDoughnut('prototype-4', pieLabels, pieData);
     </script>
 </body>
 </html>

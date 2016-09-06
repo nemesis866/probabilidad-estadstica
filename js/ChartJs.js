@@ -58,21 +58,18 @@ class ChartJs
 		Chart.defaults.global.elements.point.hitRadius = 3;
 
 	}
-	// Creamos una nueva grafica
+	// Creamos una nueva grafica de barra vertical
 	// @param id identificador del lienzo donde se creara la grafica
 	// @param label Etiqueta para la tabla
 	// @param labels Objeto con las etiquetas para las columnas
 	// @param data Objeto con los datos especificos para cada columna
 	// @param borderSize Tamaño del grosor del border
 	// @param opacity Opacidad para los fondos de las columnas
-	createBar(id, label, labels, data, borderSize = 1, opacity = 4)
+	createBar(id, label, labels, data, borderSize = 1, opacity = 9)
 	{
 		let ctx; // Lienzo para la grafica
 		let background = []; // Colores de fondo
 		let border = []; // Colores de borde
-		labels = ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"]; // [OPCIONAL]
-		label = '# de votos'; // OPCIONAL
-		data = [12, 19, 3, 5, 2, 3]; // OPCIONAL
 
 		// Obtenemos el contexto donse se imprimira la grafica
 		if(document.getElementById(id)){
@@ -115,9 +112,66 @@ class ChartJs
 		    }
 		});
 	}
+	// Creamos una nueva grafica de barra horizontal
+	// @param id identificador del lienzo donde se creara la grafica
+	// @param label Etiqueta para la tabla
+	// @param labels Objeto con las etiquetas para las columnas
+	// @param data Objeto con los datos especificos para cada columna
+	// @param borderSize Tamaño del grosor del border
+	// @param opacity Opacidad para los fondos de las columnas
+	createHorizontalBar(id, label, labels, data, borderSize = 1, opacity = 7)
+	{
+		let ctx; // Lienzo para la grafica
+		let background = []; // Colores de fondo
+		let border = []; // Colores de borde
+
+		// Obtenemos el contexto donse se imprimira la grafica
+		if(document.getElementById(id)){
+			ctx = document.getElementById(id);
+		} else {
+			console.log('El identificador para la grafica no existe');
+			return
+		}
+
+		// Creamos los obetos background y los border
+		for(let i = 0; i < labels.length; i++){
+			// Background
+			background.push('rgba(' + this.colors[i] + ',0.' + opacity + ')');
+			// Borders
+			border.push('rgba(' + this.colors[i] + ',1)');
+		}
+
+		// Configuramos la grafica
+		let myChart = new Chart(ctx, {
+			type: 'horizontalBar', // Tipo de grafica (bar)
+			data: { // Datos de la grafica
+				//labels: , // Etiquetas para la grafica
+				labels: labels,
+		        datasets: [{
+		            label: label, // Etiqueta para la columna
+		            data: data, // Datos de cada columna
+		            backgroundColor: background, // Fondos para las columnas
+		            borderColor: border, // Bordes para las columnas
+		            borderWidth: borderSize // Tamaño del borde
+		        }]
+		    },
+		    options: {
+		        scales: {
+		            xAxes: [{
+		                ticks: {
+		                    beginAtZero: true
+		                }
+		            }]
+		        }
+		    }
+		});
+	}
 	// Crea una grafica de linea [pag. 14 documentacion]
 	// @param id identificador del lienzo donde se creara la grafica
-	createLine(id)
+	// @param label Etiqueta para la tabla
+	// @param labels Objeto con las etiquetas para las columnas
+	// @param data Objeto con los datos especificos para cada columna
+	createLine(id, label, labels, data)
 	{
 		let ctx; // Lienzo para la grafica
 		let background = []; // Colores de fondo
@@ -135,11 +189,109 @@ class ChartJs
 		let myChart = new Chart(ctx, {
 			type: 'line', // Tipo de grafica (line)
 			data: {
-				labels: ["January", "February", "March", "April", "May", "June", "July"], // Etiquetas para columnas
+				labels: labels, // Etiquetas para columnas
 				datasets: [{
-					label: 'Etiqueta para la grafica', // Titulo para la grafica
+					label: label, // Titulo para la grafica
 					fill: true, // La grafica tiene color [true, false]
-					data: [65, 59, 80, 81, 56, 55, 40] // Datos a mostrar
+					data: data // Datos a mostrar
+				}]
+			},
+			options: {
+		        scales: {
+		            yAxes: [{
+		                ticks: {
+		                    beginAtZero: true
+		                }
+		            }]
+		        }
+		    }
+		});
+	}
+	// Crea una grafica de tipo pie
+	// @param id identificador del lienzo donde se creara la grafica
+	// @param labels Objeto con las etiquetas para las columnas
+	// @param data Objeto con los datos especificos para cada columna
+	// @param opacity opacidad para el fondo de cada columna
+	createPie(id, labels, data, opacity = 7)
+	{
+		let ctx; // Lienzo para la grafica
+		let background = []; // Colores de fondo
+		let hoverBackground = []; // Colores de fondo hover
+		let border = []; // Colores de borde
+
+		// Obtenemos el contexto donse se imprimira la grafica
+		if(document.getElementById(id)){
+			ctx = document.getElementById(id);
+		} else {
+			console.log('El identificador para la grafica no existe');
+			return
+		}
+
+		// Creamos los obetos background y los border
+		for(let i = 0; i < labels.length; i++){
+			// Background
+			background.push('rgba(' + this.colors[i] + ',0.' + opacity + ')');
+			// HoverBackgroundColor
+			hoverBackground.push('rgba(' + this.colors[i] + ',1)')
+			// Borders
+			border.push('rgba(' + this.colors[i] + ',1)');
+		}
+
+		// Configuramos la grafica
+		let myChart = new Chart(ctx, {
+			type: 'pie', // Tipo de grafica (bar)
+			data: {
+				labels: labels, // Etiquetas para columnas
+				datasets: [{
+					data: data,
+					backgroundColor: background,
+					hoverBackgroundColor: hoverBackground
+				}]
+			}
+		});
+	}
+	// Crea una grafica de tipo doughnut
+	// @param id identificador del lienzo donde se creara la grafica
+	// @param labels Objeto con las etiquetas para las columnas
+	// @param data Objeto con los datos especificos para cada columna
+	// @param opacity opacidad para el fondo de cada columna
+	createDoughnut(id, labels, data, opacity = 7)
+	{
+		let ctx; // Lienzo para la grafica
+		let background = []; // Colores de fondo
+		let hoverBackground = []; // Colores de fondo hover
+		let border = []; // Colores de borde
+
+		// Obtenemos el contexto donse se imprimira la grafica
+		if(document.getElementById(id)){
+			ctx = document.getElementById(id);
+		} else {
+			console.log('El identificador para la grafica no existe');
+			return
+		}
+
+		// Creamos los obetos background y los border
+		for(let i = 0; i < labels.length; i++){
+			// Background
+			background.push('rgba(' + this.colors[i] + ',0.' + opacity + ')');
+			// HoverBackgroundColor
+			hoverBackground.push('rgba(' + this.colors[i] + ',1)')
+			// Borders
+			border.push('rgba(' + this.colors[i] + ',1)');
+		}
+
+		// Configuramos la grafica
+		let myChart = new Chart(ctx, {
+			type: 'doughnut', // Tipo de grafica (bar)
+			animation: {
+				animateScale: true
+			},
+			data: {
+				labels: labels, // Etiquetas para columnas
+				datasets: [{
+					data: data,
+					backgroundColor: background,
+					hoverBackgroundColor: hoverBackground
 				}]
 			}
 		});
