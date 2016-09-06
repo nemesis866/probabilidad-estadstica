@@ -113,6 +113,52 @@ class ChartJs
 		    }
 		});
 	}
+	// Crea una grafica de tipo doughnut
+	// @param id identificador del lienzo donde se creara la grafica
+	// @param labels Objeto con las etiquetas para las columnas
+	// @param data Objeto con los datos especificos para cada columna
+	// @param opacity opacidad para el fondo de cada columna
+	createDoughnut(id, labels, data, opacity = 7)
+	{
+		let ctx; // Lienzo para la grafica
+		let background = []; // Colores de fondo
+		let hoverBackground = []; // Colores de fondo hover
+		let border = []; // Colores de borde
+
+		// Obtenemos el contexto donse se imprimira la grafica
+		if(document.getElementById(id)){
+			ctx = document.getElementById(id);
+		} else {
+			console.log('El identificador para la grafica no existe');
+			return
+		}
+
+		// Creamos los obetos background y los border
+		for(let i = 0; i < labels.length; i++){
+			// Background
+			background.push('rgba(' + this.colors[i] + ',0.' + opacity + ')');
+			// HoverBackgroundColor
+			hoverBackground.push('rgba(' + this.colors[i] + ',1)')
+			// Borders
+			border.push('rgba(' + this.colors[i] + ',1)');
+		}
+
+		// Configuramos la grafica
+		let myChart = new Chart(ctx, {
+			type: 'doughnut', // Tipo de grafica (bar)
+			animation: {
+				animateScale: true
+			},
+			data: {
+				labels: labels, // Etiquetas para columnas
+				datasets: [{
+					data: data,
+					backgroundColor: background,
+					hoverBackgroundColor: hoverBackground
+				}]
+			}
+		});
+	}
 	// Creamos una nueva grafica de barra horizontal
 	// @param id identificador del lienzo donde se creara la grafica
 	// @param label Etiqueta para la tabla
@@ -240,52 +286,6 @@ class ChartJs
 		// Configuramos la grafica
 		let myChart = new Chart(ctx, {
 			type: 'pie', // Tipo de grafica (bar)
-			data: {
-				labels: labels, // Etiquetas para columnas
-				datasets: [{
-					data: data,
-					backgroundColor: background,
-					hoverBackgroundColor: hoverBackground
-				}]
-			}
-		});
-	}
-	// Crea una grafica de tipo doughnut
-	// @param id identificador del lienzo donde se creara la grafica
-	// @param labels Objeto con las etiquetas para las columnas
-	// @param data Objeto con los datos especificos para cada columna
-	// @param opacity opacidad para el fondo de cada columna
-	createDoughnut(id, labels, data, opacity = 7)
-	{
-		let ctx; // Lienzo para la grafica
-		let background = []; // Colores de fondo
-		let hoverBackground = []; // Colores de fondo hover
-		let border = []; // Colores de borde
-
-		// Obtenemos el contexto donse se imprimira la grafica
-		if(document.getElementById(id)){
-			ctx = document.getElementById(id);
-		} else {
-			console.log('El identificador para la grafica no existe');
-			return
-		}
-
-		// Creamos los obetos background y los border
-		for(let i = 0; i < labels.length; i++){
-			// Background
-			background.push('rgba(' + this.colors[i] + ',0.' + opacity + ')');
-			// HoverBackgroundColor
-			hoverBackground.push('rgba(' + this.colors[i] + ',1)')
-			// Borders
-			border.push('rgba(' + this.colors[i] + ',1)');
-		}
-
-		// Configuramos la grafica
-		let myChart = new Chart(ctx, {
-			type: 'doughnut', // Tipo de grafica (bar)
-			animation: {
-				animateScale: true
-			},
 			data: {
 				labels: labels, // Etiquetas para columnas
 				datasets: [{
