@@ -86,7 +86,7 @@ Empezara la compilación para mac os, windws de 32 y 64 bits.
 # Integrantes del equipo
 
 * Andrade González Paulo César
-* Garcia Quijas Juan Pablo
-* Lazo Godinez Maria Ines
+* García Quijas Juan Pablo
+* Lazo Godínez María Inés
 * Sanchez Gutierrez Alejandra Amaranta
 * Zavala Ortega David

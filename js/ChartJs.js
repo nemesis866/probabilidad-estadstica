@@ -41,7 +41,8 @@ class ChartJs
 		Chart.defaults.global.title.padding = 10; // Margen para el titulo arriba y abajo
 
 		// Configuración de la linea
-		Chart.defaults.global.elements.line.tension = 0.4; // Tension de la curva
+		Chart.defaults.global.elements.line.tension = 0.1; // Tension de la curva
+		Chart.defaults.global.elements.line.fill = false; // La grafica tiene color [true, false]
 		Chart.defaults.global.elements.line.stepped = false; // Mostrar rectanglo en lugar de curva
 		Chart.defaults.global.elements.line.backgroundColor = 'rgba(54, 162, 235, 0.7)'; // Color del relleno
 		Chart.defaults.global.elements.line.borderWidth = 4; // Ancho para el borde
@@ -192,7 +193,6 @@ class ChartJs
 				labels: labels, // Etiquetas para columnas
 				datasets: [{
 					label: label, // Titulo para la grafica
-					fill: true, // La grafica tiene color [true, false]
 					data: data // Datos a mostrar
 				}]
 			},
