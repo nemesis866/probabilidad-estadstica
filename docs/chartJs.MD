@@ -12,7 +12,7 @@ El constructor de la clase se encarga de inicializar la configuración predeterm
 let chart = new ChartJs();
 ```
 
-# Métodos disponibles en la base de datos.
+# Métodos disponibles para crear las gráficas.
 
 A continuación encontrara una descripción rapida de los métodos de la clase.-
 

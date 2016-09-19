@@ -10,10 +10,33 @@
 	<!-- Menu principal del programa //-->
 
 	<div id="wrapper">
-		<h1>Hello World!</h1>
-	    We are using node <script>document.write(process.versions.node)</script>,
-	    Chrome <script>document.write(process.versions.chrome)</script>,
-	    and Electron <script>document.write(process.versions.electron)</script>.
+		<section id="content">
+			<aside id="main-aside">
+				<ul>
+					<li onclick="mainController.router(1)">Bloque 1<br>
+						<sub>Conceptos generales</sub></li>
+					<li>Bloque 2<br>
+						<sub>Medidas de tendencia central</sub></li>
+					<li>Bloque 3<br>
+						<sub>Medidas de disersión</sub></li>
+					<li>Bloque 4<br>
+						<sub>Medidas de forma</sub></li>
+					<li>Bloque 5<br>
+						<sub>Medidas de correlación</sub></li>
+					<li>Bloque 6<br>
+						<sub>Teoría de conjuntos</sub></li>
+					<li>Bloque 7<br>
+						<sub>Técnicas de conteo</sub></li>
+					<li>Bloque 8<br>
+						<sub>Probabilidad para eventos</sub></li>
+				</ul>
+			</aside>
+			<section id="main">
+				<div id="main-content"></div>
+			</section>
+		</section>
+		<!-- Menu secundario //-->
+		<aside id="second"></aside>
 	</div>
 
 	<!-- Barra de estado //-->
@@ -27,9 +50,12 @@
 	</div>
 
 	<script src="js/vendor/chart.js"></script>
+	<script src="js/Build.js"></script>
 	<script src="js/ChartJs.js"></script>
     <script src="js/DataBase.js"></script>
+    <script src="js/MainController.js"></script>
     <script src="js/OnlineStatus.js"></script>
+    <script src="js/Table.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>

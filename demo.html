@@ -13,7 +13,7 @@
 	    Chrome <script>document.write(process.versions.chrome)</script>,
 	    and Electron <script>document.write(process.versions.electron)</script>.
 
-	    <span class="icon-home"></span>
+	    <!-- <button onclick="pdf.printHtml('wrapper')">Imprimir</button> -->
 
 		<canvas id="prototype-4"></canvas>
 		<canvas id="prototype-3"></canvas>
@@ -31,9 +31,11 @@
 	</div>
 
 	<script src="js/vendor/chart.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.2.61/jspdf.debug.js"></script>
 	<script src="js/ChartJs.js"></script>
     <script src="js/DataBase.js"></script>
     <script src="js/OnlineStatus.js"></script>
+    <script src="js/Pdf.js"></script>
     <script src="js/app.js"></script>
     <script>
     	let chart = new ChartJs();
@@ -57,6 +59,8 @@
     	let pieData = [300, 50, 100];
     	chart.createPie('prototype-3', pieLabels, pieData);
     	chart.createDoughnut('prototype-4', pieLabels, pieData);
+
+    	//let pdf = new Pdf();
     </script>
 </body>
 </html>

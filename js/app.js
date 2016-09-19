@@ -9,3 +9,9 @@ let db = new DataBase(dbName); // Base de datos
 
 // Detectar si estamos conectados a internet
 let os = new OnlineStatus();
+
+// Controlador principal de la aplicación
+let mainController = new MainController();
+
+// Trabajar con tablas
+let table = new Table();
