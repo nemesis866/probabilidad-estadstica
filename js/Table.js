@@ -7,18 +7,19 @@ class Table
 	// Constructor
 	constructor()
 	{
-		this.controlNoAgrupado = 2; // Control para tabla no agrupado
+		this.controlFilas = 2; // Control para filas
+		this.controlColumnas = 2; // Control para columnas
 	}
 	// Metodo que agrega una fila
 	addFile()
 	{
 		let html = "";
-		this.controlNoAgrupado++; // Aumentamos el control
+		this.controlFilas++; // Aumentamos el control
 
 		// Construimos el bloque de codigo
-		html += "<td><input type='text' id='" + this.controlNoAgrupado + "1' placeholder='Valor' onkeyup=table.moveColumn(event)></td>" +
-			"<td><input type='text' id='" + this.controlNoAgrupado + "2' placeholder='Valor' onkeyup='return table.keyNoAgrupado(event);'></td>" +
-			"<td id='" + this.controlNoAgrupado + "3'></td>";
+		html += "<td><input type='text' id='" + this.controlFilas + "1' placeholder='Valor' onkeyup=table.moveColumn(event)></td>" +
+			"<td><input type='text' id='" + this.controlFilas + "2' placeholder='Valor' onkeyup='return table.keyNoAgrupado(event);'></td>" +
+			"<td id='" + this.controlFilas + "3'></td>";
 
 		// Obtenemos la tabla
 		let table = document.getElementById('tabla-no-agrupado');
@@ -27,12 +28,12 @@ class Table
 		// Inyectamos el bloque de codigo
 		row.innerHTML = html;
 		// Hacemos focus
-		document.getElementById(this.controlNoAgrupado + '1').focus();
+		document.getElementById(this.controlFilas + '1').focus();
 	}
 	// Método para calcular datos no agrupados
 	calcNoAgrupado()
 	{
-		let control = this.controlNoAgrupado; // Obtenemos el control
+		let control = this.controlFilas; // Obtenemos el control
 		let suma = 0; // Suma para la frecuencia
 		let res; // Resultado del porcentaje
 
@@ -74,7 +75,7 @@ class Table
 		// Creamos el bloque html
 		html += "<table id='tabla-no-agrupado'>" +
 				"<tr>" +
-					"<th class='padding'>Tabla de distribución de frecuencias</th>" +
+					"<caption class='padding'>Tabla de distribución de frecuencias</caption>" +
 				"</tr>" +
 				"<tr id='table-title'>" +
 					"<td><input type='text' id='11' placeholder='Variable' onkeyup=table.moveColumn(event) value='Variable'></td>" +
@@ -95,20 +96,22 @@ class Table
 				"</tr>" +
 			"</table>" +
 			"<div class='right'>" +
-				"<input type='hidden' id='controlNoAgrupado' value='2'>" +
+				"<input type='hidden' id='controlFilas' value='2'>" +
 				"<p><button onclick=mainController.processDatoNoAgrupado()>Procesar</button></p>" +
 			"</div>";
 
 		// Retornamos el bloque
 		return html;
 	}
-	// Método que se ejecuta al presuinar una tecla
+	// Método que se ejecuta al presinar una tecla
 	// @param e evento disparado
 	keyNoAgrupado(e)
 	{
 		let key = window.event ? window.event.keyCode : e.which; // Obtenemos la tecla presionada
 		let id = e.target.getAttribute('id'); // Obtenemos el ID del elemento presionado
+		let nextId = parseInt(id) + 9; // Calculamos el siguiente ID
 		let value = e.target.value; // Obtenemos el valor del input
+		let control = this.controlFilas * 10 + 2; // Control de la ultima fila
 		
 		// para punto
 		if(key == 46 && value.indexOf('.') == -1){
@@ -118,7 +121,14 @@ class Table
 
 		// Para enter
 		if(key == 13){
-			this.addFile(); // Agregamos una fila nueva
+			// Verificamos si la tecla fue presionada en la ultima fila insertada
+			if(id == control){
+				this.addFile(); // Agregamos una fila nueva
+			} else {
+				// hacemos focus al siguiente elemento
+				// Hacemos focus
+				document.getElementById(nextId).focus();
+			}
 			return true;
 		}
 
