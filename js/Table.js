@@ -16,13 +16,16 @@ class Table
 		this.controlNoAgrupado++; // Aumentamos el control
 
 		// Construimos el bloque de codigo
-		html += "<tr><td><input type='text' id='" + this.controlNoAgrupado + "1' placeholder='Valor' onkeyup=table.moveColumn(event)></td>" +
+		html += "<td><input type='text' id='" + this.controlNoAgrupado + "1' placeholder='Valor' onkeyup=table.moveColumn(event)></td>" +
 			"<td><input type='text' id='" + this.controlNoAgrupado + "2' placeholder='Valor' onkeyup='return table.keyNoAgrupado(event);'></td>" +
-			"<td id='" + this.controlNoAgrupado + "3'></td>" +
-		"</tr>" ;
+			"<td id='" + this.controlNoAgrupado + "3'></td>";
 
+		// Obtenemos la tabla
+		let table = document.getElementById('tabla-no-agrupado');
+		// Insertamos una fila en la penultima posicion
+		let row = table.insertRow(parseInt(table.rows.length) - 1);
 		// Inyectamos el bloque de codigo
-		document.getElementById('insert').innerHTML += html;
+		row.innerHTML = html;
 		// Hacemos focus
 		document.getElementById(this.controlNoAgrupado + '1').focus();
 	}
@@ -69,7 +72,7 @@ class Table
 		let html = "";
 
 		// Creamos el bloque html
-		html += "<table>" +
+		html += "<table id='tabla-no-agrupado'>" +
 				"<tr>" +
 					"<th class='padding'>Tabla de distribución de frecuencias</th>" +
 				"</tr>" +
@@ -83,6 +86,7 @@ class Table
 					"<td><input type='text' id='22' placeholder='Valor' onkeyup='return table.keyNoAgrupado(event);'></td>" +
 					"<td id='23'></td>" +
 				"</tr>" +
+				// Aqui va el codigo para insertar las columnas
 				"<span id='insert'></span>" +
 				"<tr>" +
 					"<td class='padding'>Total</td>" +
