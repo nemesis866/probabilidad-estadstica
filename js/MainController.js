@@ -14,6 +14,16 @@ class MainController
 		this.resetControlMenu(0); // Inicializamos el control para bloques
 		this.table = new Table(); // Instancia para Table
 	}
+	// Metodo para cancelar una tabla
+	cancel()
+	{
+		// Borramos el contenido principal
+		document.getElementById('main-content').innerHTML = '';
+		// Reseteamos el menu
+		this.resetControlMenu();
+		document.getElementById('second').style.transform = 'translateX(-100%)';
+		document.getElementById('second').style.webkitTransform = 'translate(-100%)';	
+	}
 	// Método para cerrar el menu secundario
 	close()
 	{
@@ -26,19 +36,27 @@ class MainController
 		this.resetControlMenu(0);
 	}
 	// Metodo para agregr una tabla nueva
-	newDatoNoAgrupado()
+	newDistribucionFrecuencia()
 	{
-		let table = this.table.datoNoAgrupado(); // Obtenemos la tabla
+		let table = this.table.distribucionFrecuencia(); // Obtenemos la tabla
 		document.getElementById('main-content').innerHTML += table; // Inyectamos
 		document.getElementById('11').focus();
 	}
 	// Metodo para resetear el control del router
 	// @param id identificador del menu
-	resetControlMenu(id)
+	changeControlMenu(id)
 	{
 		for(let i = 1; i < 9; i++){
 			if(i !== id) this.controlBlock[i] = 0;
 			else this.controlBlock[i] = 1;
+		}
+	}
+	// Metodo para resetear el control del router
+	// @param id identificador del menu
+	resetControlMenu()
+	{
+		for(let i = 1; i < 9; i++){
+			this.controlBlock[i] = 0;
 		}
 	}
 	// Metodo para resetear el control del router
@@ -55,27 +73,10 @@ class MainController
 		switch(id){
 			case 1:
 				if(this.controlBlock[id] === 0){
-					this.resetControlMenu(id); // Actualizamos el control
+					this.changeControlMenu(id); // Actualizamos el control
 					document.getElementById('second').style.transform = 'translateX(0)';
 					document.getElementById('second').style.webkitTransform = 'translate(0)';
-					this.build.menuOne(); // Creamos el menu del bloque uno
-				}
-				break;
-		}
-	}
-	// Método para subrouter del menu principal
-	// @param idMenu identificador del menu
-	// @param idSubmenu identificador del submenu
-	subRouter(idMenu, idSubmenu)
-	{
-		// Verificamos el menu
-		switch(idMenu){
-			case 1:
-				// Verificamos el submenu
-				switch(idSubmenu){
-					case 1:
-						this.build.blockOneOne();
-						break;
+					this.build.blockOne('normal'); // Creamos el menu del bloque uno
 				}
 				break;
 		}

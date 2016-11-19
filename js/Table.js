@@ -1,5 +1,6 @@
 /*****************************************************
-Clase para trabajar con tablas
+Clase para trabajar con tabla de distribucion de
+frcuencia (menor a 20 datos)
 *****************************************************/
 
 class Table
@@ -7,6 +8,7 @@ class Table
 	// Constructor
 	constructor()
 	{
+		this.build = new Build(); // Creamos una instancia de Build
 		this.controlFilas = 2; // Control para filas
 		this.controlColumnas = 2; // Control para columnas
 	}
@@ -14,24 +16,30 @@ class Table
 	addFile()
 	{
 		let html = "";
-		this.controlFilas++; // Aumentamos el control
 
-		// Construimos el bloque de codigo
-		html += "<td><input type='text' id='" + this.controlFilas + "1' placeholder='Valor' onkeyup=table.moveColumn(event)></td>" +
-			"<td><input type='text' id='" + this.controlFilas + "2' placeholder='Valor' onkeyup='return table.keyNoAgrupado(event);'></td>" +
-			"<td id='" + this.controlFilas + "3'></td>";
+		// Verificamos que existan menos de 20 filas
+		if(this.controlFilas <= 20){
+			this.controlFilas++; // Aumentamos el control
 
-		// Obtenemos la tabla
-		let table = document.getElementById('tabla-no-agrupado');
-		// Insertamos una fila en la penultima posicion
-		let row = table.insertRow(parseInt(table.rows.length) - 1);
-		// Inyectamos el bloque de codigo
-		row.innerHTML = html;
-		// Hacemos focus
-		document.getElementById(this.controlFilas + '1').focus();
+			// Obtenemos la tabla
+			let table = document.getElementById('tabla-no-agrupado');
+			// Insertamos una fila en la penultima posicion
+			let row = table.insertRow(parseInt(table.rows.length) - 1);
+			// Agregamos la primer columna
+			let cell1 = row.insertCell(0);
+			cell1.innerHTML = "<input type='text' id='" + this.controlFilas + "1' placeholder='Valor' onkeyup=table.moveColumn(event)>";
+			// Agregamos la segunda columna
+			let cell2 = row.insertCell(1);
+			cell2.innerHTML = "<input type='text' id='" + this.controlFilas + "2' placeholder='Valor' onkeyup='return table.keyNoAgrupado(event);'>";
+			// Agregamos la tercer columna
+			let cell3 = row.insertCell(2);
+			cell3.setAttribute('id', this.controlFilas + '3');
+			// Hacemos focus
+			document.getElementById(this.controlFilas + '1').focus();
+		}
 	}
 	// Método para calcular datos no agrupados
-	calcNoAgrupado()
+	calcDistribucionFrecuencia()
 	{
 		let control = this.controlFilas; // Obtenemos el control
 		let suma = 0; // Suma para la frecuencia
@@ -42,6 +50,7 @@ class Table
 			// obtenemos el dato
 			if(parseInt(document.getElementById(i + '2').value) >= 0){
 				// Sumamos (primero transformamos a tipo integer)
+				console.log(i);
 				suma += parseInt(document.getElementById(i + '2').value);
 			}
 		}
@@ -68,8 +77,11 @@ class Table
 		}
 	}
 	// Método para insertar tabla nueva de datos no agrupados
-	datoNoAgrupado()
+	distribucionFrecuencia()
 	{
+		// Cambiamos el bloque del menu
+		this.build.blockOne('new'); // Creamos el menu del bloque uno
+
 		let html = "";
 
 		// Creamos el bloque html
@@ -115,7 +127,7 @@ class Table
 		
 		// para punto
 		if(key == 46 && value.indexOf('.') == -1){
-			this.calcNoAgrupado(); // Realizamos los calculos
+			this.calcDistribucionFrecuencia(); // Realizamos los calculos
 			return true;
 		}
 
@@ -135,7 +147,7 @@ class Table
 		// Verificamos si es un numero
 		let bool = /\d/.test(String.fromCharCode(key));
 		if(bool){
-			this.calcNoAgrupado(); // Realizamos los calculos
+			this.calcDistribucionFrecuencia(); // Realizamos los calculos
 			return true;
 		}
 

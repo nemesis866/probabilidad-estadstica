@@ -183,6 +183,10 @@ Plantilla principal
 	width: 20%;
 }
 #content #main-aside ul,
+#second
+{
+	background-color: rgba(0, 0, 0, 0,1);
+}
 #second ul
 {
 	background-color: #eee;
