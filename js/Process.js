@@ -15,10 +15,126 @@ class Process
 	// @size numero de clases
 	clase(data, size)
 	{
+		// Ordenamos los datos
+		data = this.orderByAsd(data);
+
 		let rango = this.rango(data);
 		let x = rango / size;
 		
 		return x;
+	}
+	// Metodo para obtener la media aritmetica
+	// @param data array con los datos
+	mediaAritmetica(data)
+	{
+		let size = data.length;
+		let suma = 0;
+		let result = 0;
+
+		// Sumamos los ratos
+		for(let i = 0; i < size; i++){
+			suma += data[i];
+		}
+
+		// Obtenemos la media
+		result = suma / size;
+
+		return result;
+	}
+	// Metodo para obtener la media armonaca
+	// @param data array con los datos
+	mediaArmonica(data)
+	{
+		let size = data.length;	
+		let total = 0; // Total de digitos sumados
+		let result = 0; // Resultado
+
+		// Sumamos los valores
+		for(let i = 0; i < size; i++){
+			total += 1 / data[i];
+		}
+
+		// Calculamos el resultado
+		result = size / total;
+
+		return result;
+	}
+	// Metodo para obtener la media geometrica
+	// @param data array con los datos
+	mediaGeometrica(data)
+	{
+		let size = data.length;
+		let total = 1; // Total de digitos multiplicados
+		let result = 0; // Resultado
+
+		// Multiplicamos los valores
+		for(let i = 0; i < size; i++){
+			total *= data[i];
+		}
+
+		// Sacamos la raiz
+		result = Math.pow(total, 1 / size);
+
+		return result;
+	}
+	// Metodo para obtener la mediana
+	// @param data array con los datos
+	mediana(data)
+	{
+		let size = data.length;
+		let result = 0;
+
+		// Verificamos si el tamaño es par
+		if(size % 2 == 0){
+			size = size / 2;
+			result = (data[size - 1] + data[size]) / 2;
+		} else {
+			size = (size + 1) / 2;
+			result = data[size - 1];
+		}
+
+		return result;
+	}
+	// Metodo para obtener la moda
+	// @param data array con los datos
+	moda(data)
+	{
+		let size = data.length;
+		let suma = 0; // Suma de valores repetidos
+		let x = 0; // Valor a comprobar
+		let aux = 0; // Control auxiliar
+		let controlSuma = 0; // Control para suma
+		let result = 0; // Resultado
+		let control = 0; // Control de repeticiones
+
+		for(let i = 0; i < size; i++){
+			control = 0;
+			x = data[i];
+			for(let j = 0; j < size; j++){
+				if(x == data[j]){
+					control++;
+				}
+			}
+			// Comprobamos los resultados
+			if(control > aux){
+				result = x;
+				suma = x; // reseteamos suma
+				controlSuma = 1; // reseteamos control
+			} else if(control == aux){
+				suma += x;
+				controlSuma++;
+			}
+			// Actualizamos datos
+			aux = control;
+		}
+
+		// Obtenemos resultado
+		if(suma > 0){
+			result = suma / controlSuma;
+		}
+
+		// Retornamos resultado
+		return result;
 	}
 	// Metodo para ordenar un array de forma ascendente
 	// @param data array con los datos
@@ -46,6 +162,9 @@ class Process
 	// @param data array con los datos
 	rango(data)
 	{
+		// Ordenamos los datos
+		data = this.orderByAsd(data);
+
 		let x = data[data.length - 1] - data[0];
 
 		return x;
@@ -211,30 +330,8 @@ class Process
 		for(let i = 0; i < 4; i++){ // Columnas
 			for(let j = 0; j < filas; j++){ // filas
 				document.getElementById((j+11)+''+(i+11)).innerHTML = data[controlAux];
-				console.log(data[controlAux]);
 				controlAux++;
 			}
 		}
-	}
-	// Metodo para mostrar tabla ordenada
-	// @param data array con los datos a trabajar
-	// @param size numero de clase
-	tablaRangoClase(data, size)
-	{
-		// Ordenamos los datos
-		data = this.orderByAsd(data);
-
-		// Obtenemos el rango
-		let div = document.createElement('div');
-		// Obtenemos el tamaño de la clase
-		let p = document.createElement('p');
-		let text = document.createTextNode('Rango: '+ this.rango(data).toFixed(2));
-		p.appendChild(text);
-		div.appendChild(p);
-		let p2 = document.createElement('p');
-		let text2 = document.createTextNode('Tamaño de clase: '+ this.clase(data, size ).toFixed(2));
-		p2.appendChild(text2);
-		div.appendChild(p2);
-		document.getElementById('main-content').appendChild(div); // Inyectamos
 	}
 }

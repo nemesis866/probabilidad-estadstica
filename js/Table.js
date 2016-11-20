@@ -213,13 +213,74 @@ class Table
 						labels[i-1] = document.getElementById((i+1) + '' + (j+1)).value;
 					}
 				} else if(j == 1){
-					data[i-1][j] = document.getElementById((i+1) + '' + (j+1)).value;
-					unidades[i-1] = parseInt(document.getElementById((i+1) + '' + (j+1)).value);
+					// Verificamos si el campo de datos esta vacio
+					if(document.getElementById((i+1) + '' + (j+1)).value.length > 0){
+						data[i-1][j] = document.getElementById((i+1) + '' + (j+1)).value;
+						unidades[i-1] = parseInt(document.getElementById((i+1) + '' + (j+1)).value);
+					} else {
+						document.getElementById((i+1) + '' + (j+1)).value = 0;
+					}
 				} else {
-					porcentajes[i-1] = parseFloat(document.getElementById((i+1) + '' + (j+1)).innerHTML);
+					// Verificamos si el campo de datos esta vacio
+					if(document.getElementById((i+1) + '' + (j+1)).innerHTML.length > 0){
+						porcentajes[i-1] = parseFloat(document.getElementById((i+1) + '' + (j+1)).innerHTML);
+					} else {
+						document.getElementById((i+1) + '' + (j+1)).innerHTML = '0%';
+					}
 				}
 			}
 		}
+
+		// Mostramos texto para resultados
+		let h = document.createElement('h2');
+		h.setAttribute('class', 'results-title');
+		let hText = document.createTextNode('Resultados:');
+		h.appendChild(hText);
+		document.getElementById('main-content').appendChild(h);
+
+		// Obtenem0s medidas de tendencia central
+		let table = document.createElement('table');
+		table.setAttribute('id', 'medidas');
+		let caption = document.createElement('caption');
+		let text = document.createTextNode('Medidas de tendencia central');
+		caption.appendChild(text);
+		table.appendChild(caption);
+		let row = table.insertRow(0);
+		let cell = row.insertCell(0);
+		text = document.createTextNode('Media aritmética');
+		cell.appendChild(text);
+		cell = row.insertCell(1);
+		text = document.createTextNode(this.process.mediaAritmetica(unidades).toFixed(2));
+		cell.appendChild(text);
+		row = table.insertRow(1);
+		cell = row.insertCell(0);
+		text = document.createTextNode('Moda');
+		cell.appendChild(text);
+		cell = row.insertCell(1);
+		text = document.createTextNode(this.process.moda(unidades).toFixed(2));
+		cell.appendChild(text);
+		row = table.insertRow(2);
+		cell = row.insertCell(0);
+		text = document.createTextNode('Mediana');
+		cell.appendChild(text);
+		cell = row.insertCell(1);
+		text = document.createTextNode(this.process.mediana(unidades).toFixed(2));
+		cell.appendChild(text);
+		row = table.insertRow(3);
+		cell = row.insertCell(0);
+		text = document.createTextNode('Media geométrica');
+		cell.appendChild(text);
+		cell = row.insertCell(1);
+		text = document.createTextNode(this.process.mediaGeometrica(unidades).toFixed(2));
+		cell.appendChild(text);
+		row = table.insertRow(4);
+		cell = row.insertCell(0);
+		text = document.createTextNode('Media Armónica');
+		cell.appendChild(text);
+		cell = row.insertCell(1);
+		text = document.createTextNode(this.process.mediaArmonica(unidades).toFixed(2));
+		cell.appendChild(text);
+		document.getElementById('main-content').appendChild(table);
 
 		// Creamos los elementos
 		let canvas1 = document.createElement('canvas');

@@ -14,6 +14,7 @@ class MainController
 		this.resetControlMenu(0); // Inicializamos el control para bloques
 		this.table = new Table(); // Instancia para Table
 		this.datoAgrupado = new DatoAgrupado(); // Instanciamos la clase
+		this.datoNoAgrupado = new DatoNoAgrupado(); // Instanciamos la clase
 	}
 	// Metodo para cancelar una tabla
 	cancel()
@@ -49,6 +50,12 @@ class MainController
 	newDatoAgrupado()
 	{
 		this.datoAgrupado.createTable(); // Obtenemos la tabla
+		document.getElementById('11').focus();
+	}
+	// Metodo para agregr una tabla nueva
+	newDatoNoAgrupado()
+	{
+		this.datoNoAgrupado.createTable(); // Obtenemos la tabla
 		document.getElementById('11').focus();
 	}
 	// Metodo para agregr una tabla nueva

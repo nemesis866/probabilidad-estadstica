@@ -56,7 +56,7 @@ class Build
 		// Boton 1
 		let li1 = document.createElement('li');
 		if(type === 'normal' || type === 'example'){
-			li1.setAttribute('onclick', 'mainController.newDatoAgrupado()');
+			li1.setAttribute('onclick', 'mainController.newDatoNoAgrupado()');
 		}
 		let li1Text = document.createTextNode('Nuevo');
 		li1.appendChild(li1Text);
@@ -92,7 +92,7 @@ class Build
 		// Boton 1
 		let li1 = document.createElement('li');
 		if(type === 'normal' || type === 'example'){
-			li1.setAttribute('onclick', 'mainController.newDistribucionFrecuencia()');
+			li1.setAttribute('onclick', 'mainController.newDatoAgrupado()');
 		}
 		let li1Text = document.createTextNode('Nuevo');
 		li1.appendChild(li1Text);

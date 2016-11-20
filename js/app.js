@@ -15,4 +15,4 @@ let mainController = new MainController();
 
 // Trabajar con tablas
 let table = new Table();
-let datoAgrupado = new DatoAgrupado();
+let datoNoAgrupado = new DatoNoAgrupado();

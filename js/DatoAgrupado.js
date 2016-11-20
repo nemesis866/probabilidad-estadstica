@@ -12,6 +12,7 @@ class DatoAgrupado
 		this.controlColumnas = 4; // Control para columnas
 		this.process = new Process(); // Instanciamos la clase process
 		this.chart = new ChartJs(); // Instanciamos la clase Chartjs
+		this.letter = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S'];
 	}
 	// Metodo que agrega una fila
 	addFile()
@@ -26,16 +27,16 @@ class DatoAgrupado
 		let row = table.insertRow(parseInt(table.rows.length));
 		// Agregamos la primer columna
 		let cell1 = row.insertCell(0);
-		cell1.innerHTML = "<input type='text' id='" + this.controlFilas + "1' placeholder='Valor' onkeyup=datoAgrupado.moveColumn(event)>";
+		cell1.innerHTML = "<input type='text' id='" + this.controlFilas + "1' placeholder='Valor' onkeyup=datoNoAgrupado.moveColumn(event)>";
 		// Agregamos la segunda columna
 		let cell2 = row.insertCell(1);
-		cell2.innerHTML = "<input type='text' id='" + this.controlFilas + "2' placeholder='Valor' onkeyup=datoAgrupado.moveColumn(event)>";
+		cell2.innerHTML = "<input type='text' id='" + this.controlFilas + "2' placeholder='Valor' onkeyup=datoNoAgrupado.moveColumn(event)>";
 		// Agregamos la tercera columna
 		let cell3 = row.insertCell(2);
-		cell3.innerHTML = "<input type='text' id='" + this.controlFilas + "3' placeholder='Valor' onkeyup=datoAgrupado.moveColumn(event)>";
+		cell3.innerHTML = "<input type='text' id='" + this.controlFilas + "3' placeholder='Valor' onkeyup=datoNoAgrupado.moveColumn(event)>";
 		// Agregamos la cuarta columna
 		let cell4 = row.insertCell(3);
-		cell4.innerHTML = "<input type='text' id='" + this.controlFilas + "4' placeholder='Valor' onkeyup='return datoAgrupado.keyNoAgrupado(event);'>";
+		cell4.innerHTML = "<input type='text' id='" + this.controlFilas + "4' placeholder='Valor' onkeyup='return datoNoAgrupado.keyNoAgrupado(event);'>";
 		
 		// Hacemos focus
 		document.getElementById(this.controlFilas + '1').focus();
@@ -51,16 +52,29 @@ class DatoAgrupado
 
 		let table = document.createElement('table'); // Creamos una table
 		table.setAttribute('id', 'dato-agrupado');
-		table.innerHTML = "<caption class='padding'>Tabla de datos desordenados<caption>";
-		let row2 = table.insertRow(0); // Insertamos fila 2
+		table.innerHTML = "<caption class='padding'>Tabla de datos agrupados<caption>";
+		let row = table.insertRow(0); // Insertamos fila 1
+		let cell = row.insertCell(0);
+		let text = document.createTextNode('Columna');
+		cell.appendChild(text);
+		cell = row.insertCell(1);
+		text = document.createTextNode('Tamaño de clase');
+		cell.appendChild(text);
+		cell = row.insertCell(2);
+		text = document.createTextNode('Marca de clase K');
+		cell.appendChild(text);
+		cell = row.insertCell(3);
+		text = document.createTextNode('N° de observaciones');
+		cell.appendChild(text);
+		let row2 = table.insertRow(1); // Insertamos fila 2
 		let cell1 = row2.insertCell(0);
-		cell1.innerHTML = "<input type='text' id='11' placeholder='Variable' onkeyup=datoAgrupado.moveColumn(event) placeholder='Valor'>";
+		text = document.createTextNode('A');
+		cell1.appendChild(text);
 		let cell2 = row2.insertCell(1);
-		cell2.innerHTML = "<input type='text' id='12' placeholder='Variable' onkeyup=datoAgrupado.moveColumn(event) placeholder='Valor'>";
+		cell2.innerHTML = "De <input type='text' id='11' class='agrupado' placeholder='Valor' onkeyup=datoNoAgrupado.moveColumn(event)>A<input type='text' id='12' class='agrupado' onkeyup=datoNoAgrupado.moveColumn(event) placeholder='Valor'>";
 		let cell3 = row2.insertCell(2);
-		cell3.innerHTML = "<input type='text' id='13' placeholder='Variable' onkeyup=datoAgrupado.moveColumn(event) placeholder='Valor'>";
 		let cell4 = row2.insertCell(3);
-		cell4.innerHTML = "<input type='text' id='14' placeholder='Variable' onkeyup=datoAgrupado.keyNoAgrupado(event) placeholder='Valor'>";
+		cell4.innerHTML = "<input type='text' id='13' onkeyup=datoNoAgrupado.keyNoAgrupado(event) placeholder='Valor'>";
 
 		document.getElementById('main-content').appendChild(table); // Inyectamos
 
@@ -69,7 +83,7 @@ class DatoAgrupado
 		// Creamos el bloque html
 		html += "<div class='right'>" +
 				"<input type='hidden' id='controlFilas' value='2'>" +
-				"<p><button onclick=datoAgrupado.processData()>Procesar</button></p>" +
+				"<p><button onclick=datoNoAgrupado.processData()>Procesar</button></p>" +
 			"</div>" +
 			"<div id='inject'></div>";
 
@@ -129,58 +143,6 @@ class DatoAgrupado
 	// metodo para procesar la tabla de distribucion de frecuencia
 	processData()
 	{
-		let f = this.controlFilas; // Filas
-		let c = this.controlColumnas; // Columnas
-		let data = []; // Matriz para datos
-		let control = 0; // Control para ingreso de datos
-
-		// Obtenemos todos los datos de la tabla
-		for(let i = 0; i < f; i++){
-			for(let j = 0; j < c; j++){
-				// Verificamos si los campos estan con datos
-				if(document.getElementById((i+1)+''+(j+1)).value.length > 0){
-					data[control] = parseFloat(document.getElementById((i+1)+''+(j+1)).value);
-				} else {
-					data[control] = 0;
-				}
-				control++; // Aumentamos el control
-			}
-		}
-
-		// Creamos la tabla de datos ordenados
-		this.process.tablaOrdenada(data, 4);
-		// Obtenemos rango y clase
-		this.process.tablaRangoClase(data, 4);
-		// Tabla de distribucion de frecuencia
-		let results = this.process.tablaDistribucionFrecuencia(data, 4);
-
-		// Generamos las tablas
-		// Creamos los elementos
-		let canvas1 = document.createElement('canvas');
-		let canvas2 = document.createElement('canvas');
-		let canvas3 = document.createElement('canvas');
-		let canvas4 = document.createElement('canvas');
-		let canvas5 = document.createElement('canvas');
-
-		// Agregamos los atributos
-		canvas1.setAttribute('id', 'view1');
-		canvas2.setAttribute('id', 'view2');
-		canvas3.setAttribute('id', 'view3');
-		canvas4.setAttribute('id', 'view4');
-		canvas5.setAttribute('id', 'view5');
-
-		// Inyectamos
-		document.getElementById('main-content').appendChild(canvas1);
-		document.getElementById('main-content').appendChild(canvas2);
-		document.getElementById('main-content').appendChild(canvas3);
-		document.getElementById('main-content').appendChild(canvas4);
-		document.getElementById('main-content').appendChild(canvas5);
-
-		// Generamos las tablas
-		this.chart.createBar('view1', 'Histograma (unidades)', results[0], results[1]);
-		this.chart.createBar('view2', 'Histograma (porcentajes)', results[0], results[2]);
-		this.chart.createPie('view3', results[0], results[1]);
-		this.chart.createDoughnut('view4', results[0], results[2]);
-		this.chart.createLine('view5', 'Polígono de frecuencia', results[0], results[1]);
+		
 	}
 }
