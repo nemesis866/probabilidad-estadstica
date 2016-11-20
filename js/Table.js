@@ -11,6 +11,8 @@ class Table
 		this.build = new Build(); // Creamos una instancia de Build
 		this.controlFilas = 2; // Control para filas
 		this.controlColumnas = 2; // Control para columnas
+		this.process = new Process(); // Instanciamos la clase process
+		this.chart = new ChartJs(); // Instanciamos la clase Chartjs
 	}
 	// Metodo que agrega una fila
 	addFile()
@@ -81,6 +83,9 @@ class Table
 	{
 		// Cambiamos el bloque del menu
 		this.build.blockOne('new'); // Creamos el menu del bloque uno
+		// Reseteamos los controles
+		this.controlFilas = 2;
+		this.controlColumnas = 2;
 
 		let html = "";
 
@@ -99,8 +104,6 @@ class Table
 					"<td><input type='text' id='22' placeholder='Valor' onkeyup='return table.keyNoAgrupado(event);'></td>" +
 					"<td id='23'></td>" +
 				"</tr>" +
-				// Aqui va el codigo para insertar las columnas
-				"<span id='insert'></span>" +
 				"<tr>" +
 					"<td class='padding'>Total</td>" +
 					"<td id='total-f'>0</td>" +
@@ -109,8 +112,9 @@ class Table
 			"</table>" +
 			"<div class='right'>" +
 				"<input type='hidden' id='controlFilas' value='2'>" +
-				"<p><button onclick=mainController.processDatoNoAgrupado()>Procesar</button></p>" +
-			"</div>";
+				"<p><button onclick=table.processDistribucionFrecuencia()>Procesar</button></p>" +
+			"</div>" +
+			"<div id='inject'></div>";
 
 		// Retornamos el bloque
 		return html;
@@ -177,5 +181,72 @@ class Table
 			id += 9; // Aumentamos en uno el ID
 			document.getElementById(id).focus();
 		}
+	}
+	// metodo para procesar la tabla de distribucion de frecuencia
+	processDistribucionFrecuencia()
+	{
+		let f = this.controlFilas - 1; // Filas
+		let c = this.controlColumnas; // Columnas
+		let data = new Array(f); // Matriz para datos
+		let labels = []; // Array para etiquetas
+		let unidades = []; // Array para unidades
+		let porcentajes = []; // Array para porcentajes
+		let control = 1; // Control para datos sin nombre
+
+		// Creamos la matriz F x C
+		for(let i = 0; i < f; i++){
+			data[i] = new Array(c);
+		}
+
+		// Recolectamos los datos de la tabla
+		for(let i = 1; i <= f; i ++){
+			for(let j = 0; j < (c+1); j++){
+				// Verificamos la celda de nombre de variable
+				if(j == 0){
+					if(document.getElementById((i+1) + '' + (j+1)).value === ''){
+						data[i-1][j] = 'Dato ' + control;
+						labels[i-1] = 'Dato ' + control;
+						document.getElementById((i+1) + '' + (j+1)).value = 'Dato ' + control;
+						control++; // Aumentamos el control
+					} else {
+						data[i-1][j] = document.getElementById((i+1) + '' + (j+1)).value;
+						labels[i-1] = document.getElementById((i+1) + '' + (j+1)).value;
+					}
+				} else if(j == 1){
+					data[i-1][j] = document.getElementById((i+1) + '' + (j+1)).value;
+					unidades[i-1] = parseInt(document.getElementById((i+1) + '' + (j+1)).value);
+				} else {
+					porcentajes[i-1] = parseFloat(document.getElementById((i+1) + '' + (j+1)).innerHTML);
+				}
+			}
+		}
+
+		// Creamos los elementos
+		let canvas1 = document.createElement('canvas');
+		let canvas2 = document.createElement('canvas');
+		let canvas3 = document.createElement('canvas');
+		let canvas4 = document.createElement('canvas');
+		let canvas5 = document.createElement('canvas');
+
+		// Agregamos los atributos
+		canvas1.setAttribute('id', 'view1');
+		canvas2.setAttribute('id', 'view2');
+		canvas3.setAttribute('id', 'view3');
+		canvas4.setAttribute('id', 'view4');
+		canvas5.setAttribute('id', 'view5');
+
+		// Inyectamos
+		document.getElementById('main-content').appendChild(canvas1);
+		document.getElementById('main-content').appendChild(canvas2);
+		document.getElementById('main-content').appendChild(canvas3);
+		document.getElementById('main-content').appendChild(canvas4);
+		document.getElementById('main-content').appendChild(canvas5);
+
+		// Generamos las tablas
+		this.chart.createBar('view1', 'Histograma (unidades)', labels, unidades);
+		this.chart.createBar('view2', 'Histograma (porcentajes)', labels, porcentajes);
+		this.chart.createPie('view3', labels, unidades);
+		this.chart.createDoughnut('view4', labels, porcentajes);
+		this.chart.createLine('view5', 'Polígono de frecuencia', labels, unidades);
 	}
 }

@@ -272,7 +272,6 @@ table input[type="text"]:focus
 }
 table td
 {
-	width: 33%;
 	border-top: 1px solid rgba(0,0,0,0.1);
 	border-left: 1px solid rgba(0,0,0,0.1);
 	text-align: center;
@@ -288,4 +287,14 @@ table #table-title
 table .padding
 {
 	padding: 5px 0;
+}
+
+#tabla-no-agrupado td
+{
+	width: 33%;
+}
+#dato-agrupado td,
+#dato-agrupado-ord td
+{
+	width: 25%;
 }
