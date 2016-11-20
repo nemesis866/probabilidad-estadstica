@@ -147,21 +147,40 @@ class DatoAgrupado
 			}
 		}
 
-		// Generamos la tabla de datos ordenada
-		let table = document.createElement('table'); // Creamos una table
-		table.setAttribute('id', 'dato-agrupado-ord');
-		table.innerHTML = "<caption class='padding'>Tabla con datos ordenados<caption>";
-		le filas = data.length / 4;
+		// Creamos la tabla de datos ordenados
+		this.process.tablaOrdenada(data, 4);
+		// Obtenemos rango y clase
+		this.process.tablaRangoClase(data, 4);
+		// Tabla de distribucion de frecuencia
+		let results = this.process.tablaDistribucionFrecuencia(data, 4);
 
-		for(let i = 0; i < filas; i++){
-			let row = table.insertRow(i); // Insertamos fila
-			for(let j = 0; j < 4; j++){
-				let cell = row.insertCell(j); // Incertamos celda
-				let cellText = createTextNode();
-				cell.appendChild(cellText);
-			}
-		}
+		// Generamos las tablas
+		// Creamos los elementos
+		let canvas1 = document.createElement('canvas');
+		let canvas2 = document.createElement('canvas');
+		let canvas3 = document.createElement('canvas');
+		let canvas4 = document.createElement('canvas');
+		let canvas5 = document.createElement('canvas');
 
-		document.getElementById('main-content').appendChild(table); // Inyectamos	
+		// Agregamos los atributos
+		canvas1.setAttribute('id', 'view1');
+		canvas2.setAttribute('id', 'view2');
+		canvas3.setAttribute('id', 'view3');
+		canvas4.setAttribute('id', 'view4');
+		canvas5.setAttribute('id', 'view5');
+
+		// Inyectamos
+		document.getElementById('main-content').appendChild(canvas1);
+		document.getElementById('main-content').appendChild(canvas2);
+		document.getElementById('main-content').appendChild(canvas3);
+		document.getElementById('main-content').appendChild(canvas4);
+		document.getElementById('main-content').appendChild(canvas5);
+
+		// Generamos las tablas
+		this.chart.createBar('view1', 'Histograma (unidades)', results[0], results[1]);
+		this.chart.createBar('view2', 'Histograma (porcentajes)', results[0], results[2]);
+		this.chart.createPie('view3', results[0], results[1]);
+		this.chart.createDoughnut('view4', results[0], results[2]);
+		this.chart.createLine('view5', 'Polígono de frecuencia', results[0], results[1]);
 	}
 }
