@@ -1,5 +1,5 @@
 /*****************************************************
-Clase para procesar informacion
+Clase para procesar informacion de datos no agrupados
 *****************************************************/
 
 class Process
@@ -22,6 +22,18 @@ class Process
 		let x = rango / size;
 		
 		return x;
+	}
+	// Metodo para obtener la desviacion estandar
+	// @param data array con los datos
+	desviacionEstandar(data)
+	{
+
+	}
+	// Metodo para obtener la desviacion media
+	// @param data array con los datos
+	desviacionMedia(data)
+	{
+
 	}
 	// Metodo para obtener la media aritmetica
 	// @param data array con los datos
@@ -333,5 +345,11 @@ class Process
 				controlAux++;
 			}
 		}
+	}
+	// Metodo para obtener la varianza
+	// @param data array con los datos
+	varianza(data)
+	{
+
 	}
 }

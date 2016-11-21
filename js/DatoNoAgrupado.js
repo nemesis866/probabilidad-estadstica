@@ -16,8 +16,6 @@ class DatoNoAgrupado
 	// Metodo que agrega una fila
 	addFile()
 	{
-		let html = "";
-
 		this.controlFilas++; // Aumentamos el control
 
 		// Obtenemos la tabla
@@ -164,6 +162,7 @@ class DatoNoAgrupado
 		let table = document.createElement('table');
 		table.setAttribute('id', 'medidas');
 		let caption = document.createElement('caption');
+		caption.setAttribute('class', 'padding');
 		let text = document.createTextNode('Medidas de tendencia central');
 		caption.appendChild(text);
 		table.appendChild(caption);
