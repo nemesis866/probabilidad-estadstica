@@ -26,7 +26,10 @@ class Build
 		li1.appendChild(li1Text);
 		// Boton 2
 		let li2 = document.createElement('li');
-		let li2Text = document.createTextNode('Ejemplo');
+		if(type === 'new'){
+			li2.setAttribute('onclick', 'mainController.newDistribucionFrecuencia()');
+		}
+		let li2Text = document.createTextNode('Limpiar');
 		li2.appendChild(li2Text);
 		// Boton 3
 		let li3 = document.createElement('li');
@@ -62,7 +65,10 @@ class Build
 		li1.appendChild(li1Text);
 		// Boton 2
 		let li2 = document.createElement('li');
-		let li2Text = document.createTextNode('Ejemplo');
+		if(type === 'new'){
+			li2.setAttribute('onclick', 'mainController.newDatoNoAgrupado()');
+		}
+		let li2Text = document.createTextNode('Limpiar');
 		li2.appendChild(li2Text);
 		// Boton 3
 		let li3 = document.createElement('li');
@@ -98,7 +104,10 @@ class Build
 		li1.appendChild(li1Text);
 		// Boton 2
 		let li2 = document.createElement('li');
-		let li2Text = document.createTextNode('Ejemplo');
+		if(type === 'new'){
+			li2.setAttribute('onclick', 'mainController.newDatoAgrupado()');	
+		}
+		let li2Text = document.createTextNode('Limpiar');
 		li2.appendChild(li2Text);
 		// Boton 3
 		let li3 = document.createElement('li');

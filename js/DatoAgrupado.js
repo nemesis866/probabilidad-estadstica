@@ -76,7 +76,7 @@ class DatoAgrupado
 	createTable()
 	{
 		// Cambiamos el bloque del menu
-		this.build.blockOne('new'); // Creamos el menu del bloque uno
+		this.build.blockThree('new'); // Creamos el menu del bloque uno
 		// Reseteamos los controles
 		this.controlFilas = 1;
 		this.controlColumnas = 3;
