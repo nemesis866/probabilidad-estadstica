@@ -144,7 +144,7 @@ Plantilla principal
 	display: inline-block;
 	font-size: 16px;
 	vertical-align: top;
-	width: 80%;
+	width: 79%;
 }
 #content #main #main-content
 {
@@ -181,21 +181,13 @@ Plantilla principal
 	font-size: 16px;
 	vertical-align: top;
 	width: 20%;
+	border-right: 1px solid #bbb;
 }
-#content #main-aside ul,
-#second
+#content #main-aside ul
 {
 	background-color: rgba(0, 0, 0, 0,1);
 }
-#second ul
-{
-	background-color: #eee;
-	border-radius: 3px;
-	box-shadow: 1px 1px rgba(0,0,0,0.1);
-	list-style: none;
-}
-#content #main-aside li,
-#second li
+#content #main-aside li
 {
 	display: inline-block;
 	padding: 10px 5%;
@@ -203,26 +195,22 @@ Plantilla principal
 	vertical-align: top;
 	width: 90%;
 }
-#content #main-aside li:first-child,
-#second li:first-child
+#content #main-aside li:first-child
 {
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
 }
-#content #main-aside li:last-child,
-#second li:last-child
+#content #main-aside li:last-child
 {
 	border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;
 }
-#content #main-aside li:hover,
-#second li:hover
+#content #main-aside li:hover
 {
 	background-color: #ccc;
 	cursor: pointer;
 }
-#content #main-aside li sub,
-#second li sub
+#content #main-aside li sub
 {
 	margin-left: 10px;
 }
@@ -230,13 +218,11 @@ Plantilla principal
 {
 	background-color: #ddd;
 	left: 0;
-	padding: 10px;
-	padding-right: 5px;
+	opacity: 0.3;
 	position: fixed;
 	top: 0;
 	transform: translateX(-100%);
-	transition: all 0.25s ease;
-	width: 19.5%;
+	width: 21%;
 	z-index: 999;
 }
 

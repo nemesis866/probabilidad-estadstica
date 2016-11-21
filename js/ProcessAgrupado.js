@@ -147,11 +147,7 @@ class ProcessAgrupado
 		controlLi--;
 
 		// Calculamos el resultado
-		if((controlLi + 1) == 0){
-			result = data[0][controlLi] + ((promedioLi - auxLi) / data[3][controlLi+1]) * (data[1][controlLi + 1] - data[0][controlLi + 1]);
-		} else {
-			result = data[0][controlLi] + ((promedioLi - auxLi) / data[3][controlLi+1]) * (data[1][controlLi + 1] - data[0][controlLi + 1]);
-		}
+		result = data[0][controlLi] + ((promedioLi - auxLi) / data[3][controlLi+1]) * (data[1][controlLi + 1] - data[0][controlLi + 1]);
 
 		return result;
 	}
