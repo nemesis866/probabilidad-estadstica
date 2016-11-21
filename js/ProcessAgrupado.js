@@ -14,13 +14,42 @@ class ProcessAgrupado
 	// @param data array con los datos
 	desviacionEstandar(data)
 	{
+		let size = data[3].length;
+		let media = this.mediaAritmetica(data);
+		let suma = 0;
+		let total = 0;
+		let sumaFrecuencia = 0;
 
+		for(let i = 0; i < size; i++){
+			suma += Math.pow(data[2][i] - media, 2) * data[3][i];
+		}
+
+		for(let i = 0; i < size; i++){
+			sumaFrecuencia += data[3][i];
+		}
+
+		total = suma / (sumaFrecuencia - 1);
+
+		return Math.pow(total, 1/2);
 	}
 	// Metodo para obtener la desviacion media
 	// @param data array con los datos
 	desviacionMedia(data)
 	{
+		let size = data[3].length;
+		let media = this.mediaAritmetica(data);
+		let suma = 0;
+		let sumaFrecuencia = 0;
 
+		for(let i = 0; i < size; i++){
+			suma += Math.abs(data[2][i] - media) * data[3][i];
+		}
+
+		for(let i = 0; i < size; i++){
+			sumaFrecuencia += data[3][i];
+		}
+
+		return suma / sumaFrecuencia;
 	}
 	// Metodo para obtener la media aritmetica
 	// @param data array con los datos
@@ -118,7 +147,11 @@ class ProcessAgrupado
 		controlLi--;
 
 		// Calculamos el resultado
-		result = data[0][controlLi] + ((promedioLi - auxLi) / data[3][controlLi+1]) * (data[1][controlLi + 1] - data[0][controlLi + 1]);
+		if((controlLi + 1) == 0){
+			result = data[0][controlLi] + ((promedioLi - auxLi) / data[3][controlLi+1]) * (data[1][controlLi + 1] - data[0][controlLi + 1]);
+		} else {
+			result = data[0][controlLi] + ((promedioLi - auxLi) / data[3][controlLi+1]) * (data[1][controlLi + 1] - data[0][controlLi + 1]);
+		}
 
 		return result;
 	}
@@ -191,6 +224,19 @@ class ProcessAgrupado
 	// @param data array con los datos
 	varianza(data)
 	{
+		let size = data[3].length;
+		let media = this.mediaAritmetica(data);
+		let suma = 0;
+		let sumaFrecuencia = 0;
 
+		for(let i = 0; i < size; i++){
+			suma += Math.pow(data[2][i] - media, 2) * data[3][i];
+		}
+
+		for(let i = 0; i < size; i++){
+			sumaFrecuencia += data[3][i];
+		}
+
+		return suma / sumaFrecuencia;
 	}
 }

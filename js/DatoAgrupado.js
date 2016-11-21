@@ -259,6 +259,7 @@ class DatoAgrupado
 		table.appendChild(caption);
 		let row = table.insertRow(0);
 		let cell = row.insertCell(0);
+		cell.setAttribute('class', 'padding');
 		text = document.createTextNode('Media aritmética');
 		cell.appendChild(text);
 		cell = row.insertCell(1);
@@ -266,6 +267,7 @@ class DatoAgrupado
 		cell.appendChild(text);
 		row = table.insertRow(1);
 		cell = row.insertCell(0);
+		cell.setAttribute('class', 'padding');
 		text = document.createTextNode('Moda');
 		cell.appendChild(text);
 		cell = row.insertCell(1);
@@ -273,6 +275,7 @@ class DatoAgrupado
 		cell.appendChild(text);
 		row = table.insertRow(2);
 		cell = row.insertCell(0);
+		cell.setAttribute('class', 'padding');
 		text = document.createTextNode('Mediana');
 		cell.appendChild(text);
 		cell = row.insertCell(1);
@@ -280,6 +283,7 @@ class DatoAgrupado
 		cell.appendChild(text);
 		row = table.insertRow(3);
 		cell = row.insertCell(0);
+		cell.setAttribute('class', 'padding');
 		text = document.createTextNode('Media armónica');
 		cell.appendChild(text);
 		cell = row.insertCell(1);
@@ -287,12 +291,46 @@ class DatoAgrupado
 		cell.appendChild(text);
 		row = table.insertRow(4);
 		cell = row.insertCell(0);
+		cell.setAttribute('class', 'padding');
 		text = document.createTextNode('Media geométrica');
 		cell.appendChild(text);
 		cell = row.insertCell(1);
 		text = document.createTextNode(this.process.mediaGeometrica(data).toFixed(2));
 		cell.appendChild(text);
+		document.getElementById('main-content').appendChild(table);
 
+		// Obtenem0s medidas de dispersión
+		table = document.createElement('table');
+		table.setAttribute('id', 'medidas');
+		caption = document.createElement('caption');
+		caption.setAttribute('class', 'padding');
+		text = document.createTextNode('Medidas de dispersión');
+		caption.appendChild(text);
+		table.appendChild(caption);
+		row = table.insertRow(0);
+		cell = row.insertCell(0);
+		cell.setAttribute('class', 'padding');
+		text = document.createTextNode('Desviación media');
+		cell.appendChild(text);
+		cell = row.insertCell(1);
+		text = document.createTextNode(this.process.desviacionMedia(data).toFixed(2));
+		cell.appendChild(text);
+		row = table.insertRow(1);
+		cell = row.insertCell(0);
+		cell.setAttribute('class', 'padding');
+		text = document.createTextNode('Desviación estandar');
+		cell.appendChild(text);
+		cell = row.insertCell(1);
+		text = document.createTextNode(this.process.desviacionEstandar(data).toFixed(2));
+		cell.appendChild(text);
+		row = table.insertRow(2);
+		cell = row.insertCell(0);
+		cell.setAttribute('class', 'padding');
+		text = document.createTextNode('Varianza');
+		cell.appendChild(text);
+		cell = row.insertCell(1);
+		text = document.createTextNode(this.process.varianza(data).toFixed(2));
+		cell.appendChild(text);
 		document.getElementById('main-content').appendChild(table);
 	}
 }

@@ -27,13 +27,46 @@ class Process
 	// @param data array con los datos
 	desviacionEstandar(data)
 	{
+		let size = data.length;
+		let suma = 0;
+		let sumaTotal = 0;
+		let promedio = 0;
+		let result = 0;
 
+		for(let i = 0; i < size; i++){
+			suma += data[i];
+		}
+
+		promedio = suma / size;
+
+		for(let i = 0; i < size; i++){
+			sumaTotal += Math.pow(data[i] - promedio, 2);
+		}
+
+		result = sumaTotal / (size - 1);
+
+		return Math.pow(result, 1/2);
 	}
 	// Metodo para obtener la desviacion media
 	// @param data array con los datos
 	desviacionMedia(data)
 	{
+		let size = data.length;
+		let suma = 0;
+		let sumaTotal = 0;
+		let promedio = 0;
 
+		for(let i = 0; i < size; i++){
+			suma += data[i];
+		}
+
+		promedio = suma / size;
+
+		for(let i = 0; i < size; i++){
+			sumaTotal += Math.abs(data[i] - promedio);
+		}
+
+		return sumaTotal / size;
 	}
 	// Metodo para obtener la media aritmetica
 	// @param data array con los datos
@@ -200,18 +233,22 @@ class Process
 		let row = table.insertRow(0);
 		// Columna 1
 		let cell = row.insertCell(0);
+		cell.setAttribute('class', 'padding');
 		let text = document.createTextNode('Columna');
 		cell.appendChild(text);
 		// Columna 2
 		cell = row.insertCell(1);
+		cell.setAttribute('class', 'padding');
 		text = document.createTextNode('Tamaño de clase');
 		cell.appendChild(text);
 		// Columna 3
 		cell = row.insertCell(2);
+		cell.setAttribute('class', 'padding');
 		text = document.createTextNode('N°. de observaciones');
 		cell.appendChild(text);
 		// Columna 4
 		cell = row.insertCell(3);
+		cell.setAttribute('class', 'padding');
 		text = document.createTextNode('Porcentajes');
 		cell.appendChild(text);
 
@@ -230,6 +267,7 @@ class Process
 			for(let j = 0; j < 4; j++){
 				// Incertamos celda
 				let cell = row.insertCell(j);
+				cell.setAttribute('class', 'padding');
 
 				// Verificamos si es la ultima fila
 				if(i == 5){
@@ -350,6 +388,21 @@ class Process
 	// @param data array con los datos
 	varianza(data)
 	{
+		let size = data.length;
+		let suma = 0;
+		let sumaTotal = 0;
+		let promedio = 0;
 
+		for(let i = 0; i < size; i++){
+			suma += data[i];
+		}
+
+		promedio = suma / size;
+
+		for(let i = 0; i < size; i++){
+			sumaTotal += Math.pow(data[i] - promedio, 2);
+		}
+
+		return sumaTotal / (size - 1);
 	}
 }
