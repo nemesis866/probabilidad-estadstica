@@ -146,6 +146,8 @@ function createWindow ()
 	{
 		// Mostramos la ventana
 		win.show();
+		// Cerramos las dev tool de la aplicacion
+		win.closeDevTools();
 	});
 }
 
