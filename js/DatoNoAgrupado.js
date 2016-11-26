@@ -85,7 +85,7 @@ class DatoNoAgrupado
 		let control = this.controlFilas * 10 + 4; // Control de la ultima fila
 
 		// Para enter
-		if(key == 13){
+		if(key == 13 || key == 9){
 			// Verificamos si la tecla fue presionada en la ultima fila insertada
 			if(id == control){
 				this.addFile(); // Agregamos una fila nueva
@@ -107,7 +107,7 @@ class DatoNoAgrupado
 		let key = window.event ? window.event.keyCode : e.which; // Obtenemos la tecla presionada
 		let id = parseInt(e.target.getAttribute('id')); // Obtenemos el ID del elemento presionado
 
-		if(key == 13){
+		if(key == 13 || key == 9){
 			id++; // Aumentamos en uno el ID
 			document.getElementById(id).focus();
 		}

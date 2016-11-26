@@ -121,7 +121,8 @@ function createWindow ()
 		minWidth: 800, // Ancho minimo de la ventana
 		show: false, // Eliminamos el efecto de carga tipo web
 		title: 'Probabilidad',
-		width: 800 // Ancho de la ventana
+		width: 800, // Ancho de la ventana
+		// fullscreen: true // Pantalla completa activado
 	});
 
 	// Barra de progreso
@@ -131,7 +132,7 @@ function createWindow ()
 	win.loadURL(`file://${__dirname}/../index.html`);
 
 	// Abrimos las herramientas de produccion
-	win.webContents.openDevTools();
+	// win.webContents.openDevTools();
 
 	// Emitimos este evento cuando la ventana sea cerrada
 	win.on('closed', () =>
@@ -147,7 +148,10 @@ function createWindow ()
 		// Mostramos la ventana
 		win.show();
 		// Cerramos las dev tool de la aplicacion
-		win.closeDevTools();
+		// win.closeDevTools();
+		// Las devtool se abren por defecto pero por si acaso con esta limea
+		// se abren.-
+		//	win.openDevTools();
 	});
 }
 

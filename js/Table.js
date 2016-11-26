@@ -95,9 +95,9 @@ class Table
 					"<caption class='padding'>Tabla de distribución de frecuencias</caption>" +
 				"</tr>" +
 				"<tr id='table-title'>" +
-					"<td><input type='text' id='11' placeholder='Variable' onkeyup=table.moveColumn(event) value='Variable'></td>" +
-					"<td><input type='text' id='12' placeholder='Variable' onkeyup=table.moveFile(event) value='Frecuencia'></td>" +
-					"<td>Porcentaje</td>" +
+					"<td><input type='text' id='11' class='subtitulo' placeholder='Variable' onkeyup=table.moveColumn(event) value='Variable'></td>" +
+					"<td><input type='text' id='12' class='subtitulo' placeholder='Variable' onkeyup=table.moveFile(event) value='Frecuencia'></td>" +
+					"<td class='subtitulo'>Porcentaje</td>" +
 				"</tr>" +
 				"<tr>" +
 					"<td><input type='text' id='21' placeholder='Valor' onkeyup=table.moveColumn(event)></td>" +

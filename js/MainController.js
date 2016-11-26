@@ -21,8 +21,25 @@ class MainController
 	{
 		// Borramos el contenido principal
 		document.getElementById('main-content').innerHTML = '';
+		// Inyectamos la imagen de nuevo
+		let div = document.createElement('div');
+		div.setAttribute('class', 'center');
+		let h1 = document.createElement('h1');
+		let text = document.createTextNode('Proyecto final');
+		h1.appendChild(text);
+		let h2 = document.createElement('h2');
+		text = document.createTextNode('Probabilidad y estadistica');
+		h2.appendChild(text);
+		let img = document.createElement('img');
+		img.setAttribute('id', 'img-intro');
+		img.setAttribute('src', 'img/intro.jpg');
+		div.appendChild(h1);
+		div.appendChild(h2);
+		div.appendChild(img);
+		document.getElementById('main-content').appendChild(div);
 		// Reseteamos el menu
 		this.resetControlMenu();
+		// Habilidatmos el menu
 		document.getElementById('second').style.transform = 'translateX(-100%)';
 		document.getElementById('second').style.webkitTransform = 'translate(-100%)';	
 	}
