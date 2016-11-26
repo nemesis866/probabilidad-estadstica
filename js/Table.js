@@ -84,8 +84,8 @@ class Table
 		// Cambiamos el bloque del menu
 		this.build.blockOne('new'); // Creamos el menu del bloque uno
 		// Reseteamos los controles
-		this.controlFilas = 2;
-		this.controlColumnas = 2;
+		table.controlFilas = 2;
+		table.controlColumnas = 2;
 
 		let html = "";
 

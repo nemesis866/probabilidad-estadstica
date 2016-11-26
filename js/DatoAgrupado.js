@@ -17,6 +17,7 @@ class DatoAgrupado
 	// Metodo que agrega una fila
 	addFile()
 	{
+		// Obtenemos las filas
 		this.controlFilas++; // Aumentamos el control
 
 		// Obtenemos la tabla
@@ -78,8 +79,8 @@ class DatoAgrupado
 		// Cambiamos el bloque del menu
 		this.build.blockThree('new'); // Creamos el menu del bloque uno
 		// Reseteamos los controles
-		this.controlFilas = 1;
-		this.controlColumnas = 3;
+		datoAgrupado.controlFilas = 1;
+		datoAgrupado.controlColumnas = 3;
 
 		let table = document.createElement('table'); // Creamos una table
 		table.setAttribute('id', 'dato-agrupado');
@@ -175,6 +176,9 @@ class DatoAgrupado
 		if(key == 13){
 			id++; // Aumentamos en uno el ID
 			document.getElementById(id).focus();
+		}
+		if(key == 9){
+			return false;
 		}
 
 		this.processCalc(key);
